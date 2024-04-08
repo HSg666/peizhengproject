@@ -13,6 +13,7 @@ const _sfc_main = {
   setup(__props) {
     const app = getApp();
     const bannerList = common_vendor.ref([]);
+    const nav2s = common_vendor.ref([]);
     common_vendor.onLoad(() => {
       app.globalData.utils.getUserInfo();
       app.globalData.utils.request({
@@ -30,12 +31,18 @@ const _sfc_main = {
             },
             success: (ress) => {
               bannerList.value = ress.data.data.slides;
+              nav2s.value = ress.data.data.nav2s;
               console.log(bannerList.value, "ress");
             }
           });
         }
       });
     });
+    const goPage = (url) => {
+      common_vendor.index.navigateTo({
+        url
+      });
+    };
     return (_ctx, _cache) => {
       return common_vendor.e({
         a: common_vendor.p({
@@ -46,8 +53,17 @@ const _sfc_main = {
         c: common_vendor.f(bannerList.value, (item, index, i0) => {
           return {
             a: item.pic_image_url,
+            b: item.id
+          };
+        })
+      } : {}, {
+        d: nav2s.value && nav2s.value.length > 0
+      }, nav2s.value && nav2s.value.length > 0 ? {
+        e: common_vendor.f(nav2s.value, (item, index, i0) => {
+          return {
+            a: item.pic_image_url,
             b: item.id,
-            c: index
+            c: common_vendor.o(($event) => goPage(item.stype_link), item.id)
           };
         })
       } : {});

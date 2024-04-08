@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/order/index",
     "pages/user/index",
-    "pages/search/index"
+    "pages/search/index",
+    "pages/hospital/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",

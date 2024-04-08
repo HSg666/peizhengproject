@@ -21,10 +21,20 @@
 		<!-- 轮播图 -->
 		<view class="index-swiper" v-if="bannerList && bannerList.length > 0">
 			<swiper :indicator-dots="true" circular autoplay :interval="4000" :duration="1000">
-				<swiper-item v-for="(item,index) in bannerList" :key="item.id" :data-index="index">
+				<swiper-item v-for="(item,index) in bannerList" :key="item.id">
 					<image :src="item.pic_image_url" mode="widthFix"></image>
 				</swiper-item>
 			</swiper>
+		</view>
+		<!-- 2个导航 -->
+		<view class="nav2-list" v-if="nav2s && nav2s.length > 0">
+			<block>
+				<view class="nav2-item" v-for="(item,index) in nav2s" :key="item.id" @click="goPage(item.stype_link)">
+					<view class="nav2-pic">
+						<image :src="item.pic_image_url" mode="widthFix"></image>
+					</view>
+				</view>
+			</block>
 		</view>
 	</view>
 </template>
@@ -38,8 +48,9 @@
 		reactive,
 		computed
 	} from "vue"
-	const app = getApp()
+	const app = getApp() // 获取uniapp实例
 	const bannerList = ref([]) // 轮播图
+	const nav2s = ref([]) // 2个导航
 
 
 	onLoad(() => {
@@ -63,6 +74,7 @@
 					},
 					success: (ress) => {
 						bannerList.value = ress.data.data.slides // 轮播图
+						nav2s.value = ress.data.data.nav2s // 两个导航
 						console.log(bannerList.value, 'ress');
 					}
 				})
@@ -71,6 +83,12 @@
 		})
 		// console.log(app.globalData.utils, 'app.globalData.utils');
 	})
+
+	const goPage = (url) => {
+		uni.navigateTo({
+			url
+		})
+	}
 </script>
 
 <style>
@@ -88,5 +106,36 @@
 	.index-swiper swiper-item image {
 		width: 100%;
 		height: 100%;
+	}
+
+	.nav2-list {
+		margin: 10rpx 20rpx 0 20rpx;
+	}
+
+	.nav2-list::after {
+		content: '';
+		display: block;
+		height: 0;
+		line-height: 0;
+		clear: both;
+		visibility: hidden;
+	}
+
+	.nav2-item {
+		float: left;
+		margin-top: 20rpx;
+		width: 50%;
+		text-align: center;
+		box-sizing: border-box;
+		padding: 0 5rpx;
+	}
+
+	.nav2-pic {
+		width: 100%;
+	}
+
+	.nav2-pic image {
+		display: block;
+		width: 100%;
 	}
 </style>

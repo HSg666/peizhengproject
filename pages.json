@@ -31,6 +31,14 @@
 				"navigationBarTitleText" : "搜索页",
 				"navigationStyle": "custom" // 使用自定义导航栏
 			}
+		},
+		{
+			"path" : "pages/hospital/index",
+			"style" : 
+			{
+				"navigationBarTitleText" : "",
+				"enablePullDownRefresh" : false
+			}
 		}
 	],
 	"tabBar": {
