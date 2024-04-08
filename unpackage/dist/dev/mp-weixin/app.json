@@ -4,7 +4,8 @@
     "pages/order/index",
     "pages/user/index",
     "pages/search/index",
-    "pages/hospital/index"
+    "pages/hospital/index",
+    "pages/service/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",

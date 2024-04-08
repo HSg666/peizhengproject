@@ -14,6 +14,8 @@ const _sfc_main = {
     const app = getApp();
     const bannerList = common_vendor.ref([]);
     const nav2s = common_vendor.ref([]);
+    const navs = common_vendor.ref([]);
+    const hospitalList = common_vendor.ref([]);
     common_vendor.onLoad(() => {
       app.globalData.utils.getUserInfo();
       app.globalData.utils.request({
@@ -32,6 +34,8 @@ const _sfc_main = {
             success: (ress) => {
               bannerList.value = ress.data.data.slides;
               nav2s.value = ress.data.data.nav2s;
+              navs.value = ress.data.data.navs;
+              hospitalList.value = ress.data.data.hospitals;
               console.log(bannerList.value, "ress");
             }
           });
@@ -41,6 +45,11 @@ const _sfc_main = {
     const goPage = (url) => {
       common_vendor.index.navigateTo({
         url
+      });
+    };
+    const goHospitalDetail = (id) => {
+      common_vendor.index.navigateTo({
+        url: "/pages/hospital/index?hid=" + id
       });
     };
     return (_ctx, _cache) => {
@@ -62,11 +71,32 @@ const _sfc_main = {
         e: common_vendor.f(nav2s.value, (item, index, i0) => {
           return {
             a: item.pic_image_url,
-            b: item.id,
-            c: common_vendor.o(($event) => goPage(item.stype_link), item.id)
+            b: common_vendor.o(($event) => goPage(item.stype_link), item.id),
+            c: item.id
           };
         })
-      } : {});
+      } : {}, {
+        f: common_vendor.f(navs.value, (item, index, i0) => {
+          return {
+            a: item.pic_image_url,
+            b: common_vendor.t(item.title),
+            c: common_vendor.s("color:" + item.tcolor ? item.tcolor : ""),
+            d: common_vendor.o(($event) => goPage(item.stype_link), item.id),
+            e: item.id
+          };
+        }),
+        g: common_vendor.f(hospitalList.value, (item, index, i0) => {
+          return {
+            a: item.avatar ? item.avatar_url : "../../static/resource/images/avatar.jpg",
+            b: common_vendor.t(item.name),
+            c: common_vendor.t(item.rank),
+            d: common_vendor.t(item.label),
+            e: common_vendor.t(item.intro),
+            f: item.id,
+            g: common_vendor.o(($event) => goHospitalDetail(item.id), item.id)
+          };
+        })
+      });
     };
   }
 };
