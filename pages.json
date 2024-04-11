@@ -4,48 +4,43 @@
 			"path": "pages/index/index",
 			"style": {
 				"navigationBarTitleText": "首页",
-				"navigationBarBackgroundColor" : "#ffffff",
+				"navigationBarBackgroundColor": "#ffffff",
 				"navigationStyle": "custom" // 使用自定义导航栏
 			}
 		},
 		{
-			"path" : "pages/order/index",
-			"style" : 
-			{
-				"navigationBarTitleText" : "订单",
-				"navigationBarBackgroundColor" : "#ffffff"
+			"path": "pages/order/index",
+			"style": {
+				"navigationBarTitleText": "订单",
+				"navigationBarBackgroundColor": "#ffffff"
 			}
 		},
 		{
-			"path" : "pages/user/index",
-			"style" : 
-			{
-				"navigationBarTitleText" : "我的",
-				"navigationBarBackgroundColor" : "#ffffff"
+			"path": "pages/user/index",
+			"style": {
+				"navigationBarTitleText": "我的",
+				"navigationBarBackgroundColor": "#ffffff"
 			}
 		},
 		{
-			"path" : "pages/search/index",
-			"style" : 
-			{
-				"navigationBarTitleText" : "搜索页",
+			"path": "pages/search/index",
+			"style": {
+				"navigationBarTitleText": "搜索页",
 				"navigationStyle": "custom" // 使用自定义导航栏
 			}
 		},
 		{
-			"path" : "pages/hospital/index",
-			"style" : 
-			{
-				"navigationBarTitleText" : "",
-				"enablePullDownRefresh" : false
+			"path": "pages/hospital/index",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
 			}
 		},
 		{
-			"path" : "pages/service/index",
-			"style" : 
-			{
-				"navigationBarTitleText" : "",
-				"enablePullDownRefresh" : false
+			"path": "pages/service/index",
+			"style": {
+				"navigationBarTitleText": "填写服务订单",
+				"enablePullDownRefresh": false
 			}
 		}
 	],
@@ -63,7 +58,7 @@
 			"iconPath": "static/resource/images/tab_pub.png",
 			"selectedIconPath": "static/resource/images/tab_pub_seled.png",
 			"text": "订单"
-		},{
+		}, {
 			"pagePath": "pages/user/index",
 			"iconPath": "static/resource/images/tab_user.png",
 			"selectedIconPath": "static/resource/images/tab_user_seled.png",

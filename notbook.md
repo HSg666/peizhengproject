@@ -1,6 +1,6 @@
 笔记
 
-### 登录和绑定appId步骤
+### 一、登录和绑定appId步骤
 
 1、在common中创建公共自定义工具函数js，utils.js
 
@@ -78,4 +78,24 @@ export default new Utils()
 ②、uniapp配置AppId，防止微信小程序每次都需要配置
 
 uniapp -> manifest.json -> 微信小程序配置 -> 输入测试号
+
+### 二、获取url中的参数
+
+a.vue
+
+```js
+uni.navigateTo({
+			url: '/pages/hospital/index?hid=' + id
+		})
+```
+
+b.vue
+
+```js
+import {onLoad} from "@dcloudio/uni-app"
+
+onLoad((option) => {
+		console.log(option.hid, 'option');
+	})
+```
 
