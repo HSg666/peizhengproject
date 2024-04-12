@@ -99,3 +99,16 @@ onLoad((option) => {
 	})
 ```
 
+### 三、uniapp中的vue3如果给变量赋值出现XX set XX undefind
+
+只需检查初始变量时是否为reactive，同时未转成ref，那么它的赋值方式则无需.value。
+
+```js
+order.value.price 改为  order.price ,即可解决。
+```
+
+
+
+
+
+ 

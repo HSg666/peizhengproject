@@ -6868,3 +6868,4 @@ exports.resolveComponent = resolveComponent;
 exports.s = s;
 exports.t = t;
 exports.toRaw = toRaw;
+exports.watch = watch;

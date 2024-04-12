@@ -1,5 +1,7 @@
 {
   "navigationBarTitleText": "填写服务订单",
   "enablePullDownRefresh": false,
-  "usingComponents": {}
+  "usingComponents": {
+    "dt-picker": "../../components/dtPicker/dtPicker"
+  }
 }

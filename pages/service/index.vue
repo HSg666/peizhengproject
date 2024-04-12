@@ -61,6 +61,22 @@
 							</view>
 						</view>
 					</view>
+
+					<view class="weui-cell weui-cell_input">
+						<view class="weui-cell__hd" style="display: flex;width: 100%;">
+							<view class="weui-label">
+								就诊时间
+							</view>
+							<view class="weui-cell__bd">
+							</view>
+							<view class="weui-cell__ft weui-cell__ft_in-access">
+								<view>
+									<dtPicker @dtPickerChanged="onStartTimeChange" :timestamp="order.starttime"
+										placeholder="请选择就诊时间"></dtPicker>
+								</view>
+							</view>
+						</view>
+					</view>
 				</view>
 			</view>
 		</block>
@@ -82,7 +98,17 @@
 	const service = ref({}) // 服务内容
 	const hospital_index = ref(0) // 选中的医院索引
 	const hospitals = ref([]) // 可选医院数组
-	const hospitals_price = ref("") // 医院价格
+	// 订单数据
+	const order = reactive({
+		price: '', // 价格
+		starttime: 0,
+		address: {
+			userName: '',
+			cityName: '',
+			countyName: '',
+			detailInfo: ''
+		}
+	})
 
 
 	onLoad((option) => {
@@ -113,7 +139,7 @@
 						let hosI = hospitalsData[i]
 						if (hosI.id == option.hid) {
 							hospital_index.value = i; // 选中的索引
-							hospitals_price.value = hosI.service_price; // 医院价格
+							order.price = hosI.service_price ?? ''; // 医院价格
 							break;
 						}
 					}
@@ -131,8 +157,13 @@
 	const onHospitalChange = (e) => {
 		const changeIndex = parseInt(e.detail.value)
 		hospital_index.value = changeIndex
-		hospitals_price.value = hospitals[changeIndex].service_price
-		console.log(e, 'onHospitalChange');
+		order.price = hospitals.value[changeIndex].service_price ?? ''
+		console.log(order.price, 'order.value.price');
+	}
+	// 选择就诊时间
+	const onStartTimeChange = (e) => {
+		order.starttime = e.detail.value
+		// console.log(e.detail.value, '1111')
 	}
 </script>
 
