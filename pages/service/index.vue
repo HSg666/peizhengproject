@@ -77,6 +77,22 @@
 							</view>
 						</view>
 					</view>
+					<view class="weui-cell weui-cell_input" @click="goSelectPerson">
+						<view class="weui-cell__hd" style="display: flex;width: 100%;">
+							<view class="weui-label">
+								就诊人
+							</view>
+							<view class="weui-cell__bd">
+							</view>
+							<view class="weui-cell__ft weui-cell__ft_in-access">
+								<view>
+									<input type="text" class="weui-input" :value="personName" placeholder="请选择就诊人"
+										placeholder-class="vp-placeholder" :disabled="true"
+										style="text-align: right;" />
+								</view>
+							</view>
+						</view>
+					</view>
 				</view>
 			</view>
 		</block>
@@ -101,19 +117,19 @@
 	// 订单数据
 	const order = reactive({
 		price: '', // 价格
-		starttime: 0,
+		starttime: 0, // 就诊时间
 		address: {
 			userName: '',
 			cityName: '',
 			countyName: '',
 			detailInfo: ''
-		}
+		},
 	})
-
+	const personName = ref('') // 就诊人姓名
 
 	onLoad((option) => {
 		getServiceDetail(option)
-		console.log(option, 'option');
+		// console.log(option, 'option');
 	})
 	// 获取服务详情
 	const getServiceDetail = (option) => {
@@ -158,13 +174,24 @@
 		const changeIndex = parseInt(e.detail.value)
 		hospital_index.value = changeIndex
 		order.price = hospitals.value[changeIndex].service_price ?? ''
-		console.log(order.price, 'order.value.price');
+		// console.log(order.price, 'order.value.price');
 	}
 	// 选择就诊时间
 	const onStartTimeChange = (e) => {
 		order.starttime = e.detail.value
 		// console.log(e.detail.value, '1111')
 	}
+	// 就诊人
+	const goSelectPerson = () => {
+		uni.navigateTo({
+			url: '/pages/clients/index?act=select'
+		})
+	}
+	// 触发全局的自定义事件  
+	uni.$on('clientData', (data) => {
+		personName.value = data.name
+		// console.log(data, 'data');
+	})
 </script>
 
 <style>

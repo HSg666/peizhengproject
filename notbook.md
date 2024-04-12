@@ -107,7 +107,23 @@ onLoad((option) => {
 order.value.price 改为  order.price ,即可解决。
 ```
 
+### 四、uniapp如何用自定义事件传参（全局性，各页面都能接收到）
 
+发送事件
+
+```js
+发送事件名、数据
+uni.$emit('clientData', item)
+```
+
+接收事件
+
+```js
+接收事件名、获取数据
+uni.$on('clientData', (data) => {
+		personName.value = data.name
+	})
+```
 
 
 

@@ -1,0 +1,50 @@
+page {
+	background: #f4f4f4;
+}
+.weui-cells {
+	margin: 0;
+}
+.weui-cell {
+	padding: 20rpx 30rpx;
+}
+.weui-cell view {
+	font-size: 30rpx;
+}
+.weui-cell text {
+	font-size: 30rpx;
+}
+.cell-box {
+	margin: 20rpx;
+	position: relative;
+	border-radius: 10rpx;
+	background: #ffffff;
+	overflow: hidden;
+}
+.sext1 {
+	color: #4881df;
+}
+.sext2 {
+	color: #df4872;
+}
+.sex {
+	padding: 15rpx 30rpx;
+	display: inline-block;
+	border: 1rpx solid #eeeeee;
+}
+.sex1 {
+	border-right: 0 none;
+	border-radius: 8rpx 0 0 8rpx;
+}
+.sex2 {
+	border-radius: 0 8rpx 8rpx 0;
+}
+.sex1on {
+	background: #4881df;
+	border-color: #3b77dc;
+	color: #ffffff;
+}
+.sex2on {
+	background: #df4872;
+	border-color: #df4872;
+	color: #ffffff;
+}

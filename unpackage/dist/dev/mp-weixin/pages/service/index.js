@@ -19,6 +19,7 @@ const _sfc_main = {
       price: "",
       // 价格
       starttime: 0,
+      // 就诊时间
       address: {
         userName: "",
         cityName: "",
@@ -26,9 +27,9 @@ const _sfc_main = {
         detailInfo: ""
       }
     });
+    const personName = common_vendor.ref("");
     common_vendor.onLoad((option) => {
       getServiceDetail(option);
-      console.log(option, "option");
     });
     const getServiceDetail = (option) => {
       const {
@@ -64,11 +65,18 @@ const _sfc_main = {
       const changeIndex = parseInt(e.detail.value);
       hospital_index.value = changeIndex;
       order.price = hospitals.value[changeIndex].service_price ?? "";
-      console.log(order.price, "order.value.price");
     };
     const onStartTimeChange = (e) => {
       order.starttime = e.detail.value;
     };
+    const goSelectPerson = () => {
+      common_vendor.index.navigateTo({
+        url: "/pages/clients/index?act=select"
+      });
+    };
+    common_vendor.index.$on("clientData", (data) => {
+      personName.value = data.name;
+    });
     return (_ctx, _cache) => {
       return common_vendor.e({
         a: service.value.icon_image ? service.value.icon_image_url : "../../static/resource/images/avatar.jpg",
@@ -84,7 +92,9 @@ const _sfc_main = {
         j: common_vendor.p({
           timestamp: order.starttime,
           placeholder: "请选择就诊时间"
-        })
+        }),
+        k: personName.value,
+        l: common_vendor.o(goSelectPerson)
       } : {});
     };
   }
