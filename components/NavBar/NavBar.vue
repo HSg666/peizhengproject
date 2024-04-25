@@ -42,9 +42,9 @@
 	import {
 		ref,
 		reactive,
-		defineProps,
 		onBeforeMount,
-		onMounted
+		onMounted,
+		defineProps,
 	} from 'vue'
 	const props = defineProps({
 		// 状态栏
@@ -87,6 +87,8 @@
 			default: false
 		}
 	})
+
+
 	// 状态栏高度
 	const statusH = ref(0)
 	// 内容高度

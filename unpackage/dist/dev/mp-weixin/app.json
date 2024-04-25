@@ -6,7 +6,8 @@
     "pages/search/index",
     "pages/hospital/index",
     "pages/service/index",
-    "pages/clients/index"
+    "pages/clients/index",
+    "pages/order/orderDetail/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -39,5 +40,10 @@
       }
     ]
   },
+  "requiredPrivateInfos": [
+    "getLocation",
+    "chooseAddress"
+  ],
+  "permission": {},
   "usingComponents": {}
 }

@@ -1,0 +1,108 @@
+page {
+	background: #f4f4f4;
+}
+.hospital-hd {
+	margin: 20rpx 20rpx 0 20rpx;
+	background: #ffffff;
+	border-radius: 10rpx;
+}
+.hospital-hd .weui-cell {
+	padding: 20rpx;
+}
+.hospital-bd {
+	margin: 20rpx 20rpx 0 20rpx;
+	background: #ffffff;
+	border-radius: 10rpx;
+}
+.hospital-bd .weui-cells {
+	margin-top: 0;
+}
+.hospital-bd .weui-cell {
+	padding: 20rpx;
+}
+.hospital-ft {
+	margin: 20rpx 20rpx 0 20rpx;
+	background: #ffffff;
+	border-radius: 10rpx;
+}
+.hospital-ft .weui-cell {
+	padding: 20rpx;
+}
+.hosp-rank {
+	font-size: 26rpx;
+	font-weight: bold;
+	color: #0bb585;
+	margin-right: 15rpx;
+}
+.hosp-label {
+	font-size: 26rpx;
+	font-weight: bold;
+	color: #0ca7ae;
+	margin-right: 15rpx;
+}
+.serv-list {
+	margin: 0;
+	background: none;
+}
+.serv-list::before {
+	display: none;
+}
+.serv-list::after {
+	display: none;
+}
+.serv-item {
+	padding: 20rpx;
+	background: #ffffff;
+	border-radius: 10rpx;
+	overflow: hidden;
+}
+.serv-item::before {
+	display: none;
+}
+.serv-item::after {
+	display: none;
+}
+.serv-name {
+	font-weight: bold;
+	font-size: 34rpx;
+}
+.serv-logo {
+	display: block;
+	width: 150rpx;
+	height: 150rpx;
+	border-radius: 10rpx;
+	overflow: hidden;
+	margin-right: 20rpx;
+}
+.serv-line {
+	margin-top: 8rpx;
+}
+.serv-line text {
+	font-size: 26rpx;
+}
+.serv-rank {
+	font-weight: bold;
+	color: #0bb585;
+	margin-right: 15rpx;
+}
+.serv-label {
+	font-weight: bold;
+	color: #0ca7ae;
+	margin-right: 15rpx;
+}
+.serv-intro {
+	font-size: 26rpx;
+	color: #999999;
+	width: 350rpx;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.serv-price {
+	font-size: 34rpx !important;
+	font-weight: bold;
+	color: #0bb684;
+}
+.serv-unit {
+	color: #0bb684;
+}

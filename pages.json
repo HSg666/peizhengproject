@@ -11,7 +11,7 @@
 		{
 			"path": "pages/order/index",
 			"style": {
-				"navigationBarTitleText": "订单",
+				"navigationBarTitleText": "我的订单",
 				"navigationBarBackgroundColor": "#ffffff"
 			}
 		},
@@ -33,7 +33,8 @@
 			"path": "pages/hospital/index",
 			"style": {
 				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom" // 使用自定义导航栏
 			}
 		},
 		{
@@ -44,11 +45,17 @@
 			}
 		},
 		{
-			"path" : "pages/clients/index",
-			"style" : 
-			{
-				"navigationBarTitleText" : "",
-				"enablePullDownRefresh" : false
+			"path": "pages/clients/index",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/order/orderDetail/index",
+			"style": {
+				"navigationBarTitleText": "订单详情",
+				"enablePullDownRefresh": false
 			}
 		}
 	],

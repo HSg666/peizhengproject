@@ -17,6 +17,9 @@ class Utils {
 					isShowLoading: true,
 					success: (res) => {
 						console.log(res, 'request res');
+					},
+					fail: (err) => {
+						console.log(err, 'request err');
 					}
 
 				})

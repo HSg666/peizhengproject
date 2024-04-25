@@ -1,5 +1,8 @@
 {
-  "navigationBarTitleText": "订单",
+  "navigationBarTitleText": "我的订单",
   "navigationBarBackgroundColor": "#ffffff",
-  "usingComponents": {}
+  "usingComponents": {
+    "formater": "../../components/formater/formater",
+    "counter": "../../components/counter/counter"
+  }
 }

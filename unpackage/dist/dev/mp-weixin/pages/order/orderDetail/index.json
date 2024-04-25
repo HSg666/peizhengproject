@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "订单详情",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "counter": "../../../components/counter/counter",
+    "formater": "../../../components/formater/formater",
+    "uni-popup": "../../../uni_modules/uni-popup/components/uni-popup/uni-popup"
+  }
+}

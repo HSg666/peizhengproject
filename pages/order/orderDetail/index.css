@@ -1,0 +1,189 @@
+page {
+	background: #f4f4f4;
+}
+
+.od-banner {
+	overflow: hidden;
+	position: relative;
+	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAyAAAAABCAIAAACpCl0xAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAHrSURBVHjadFVBcgMxCEP3Prtv6vfUrI1A2JvMtJPYGIQQgJ+/X0YgPh+uv/V1nTCI9ZORJthGaVyWrFehU9qX/cvP9d+d9Ieyf4uVqMxPRpf/jfm5SRs+vsxVzOd19Yq8gbmZrnaUJueJtrBjPHd+klJ3aNSRA8uAF0o8rnJg1ihOTizZ5tKeJttN7AHvKNYNu3jAWeJWyMVJKJ2T/9e4h+dR4vPJi4eLik2Rp4uhZOabjTNLK1IhreUzp8MFB8Mj06YaSwxU0Z8LsYQkVDfLmNWe1ZhWTHwcwcCYp0MNb9pbqt0pmkyWu4aBBdy0yLNXXorl6nbGfdqEpQydLz4oTm7N4xgFEXkUUhst68VhkpTw6YKpFnB+8CrLcZ6xNnMFuSLegU51Cm/pBkbOaLpVSND4FgbUcCihz5Igrh68dSL9LoaiNIxWqJ17W4XNjcLcspF2JbMYhLSQtvjwOmu6UZl9wtUEPX811zn1CGt1Sxv3KknFbZcZBTWqsqjDLHAkqx66V0mSUOqh2kmnsHL4oCHjy3iTWrLv1bYs1bF7xJpq20Snfw4T06EG+15qFJ3FftQIDMYlqeRjLC8czUWtbFiXsReJ+FVKYcSf67sHQl/5KGkaplpt/aiWyeK39WS2tJWL6CmUMv8XYABQPZBxCZSO0gAAAABJRU5ErkJggg==) repeat-y center;
+	background-size: 100%;
+}
+
+.od-banner-icon {
+	position: absolute;
+	top: 30rpx;
+	right: -20rpx;
+	width: 130rpx;
+	opacity: 0.6;
+}
+
+.od-jd {
+	margin: 60rpx 40rpx;
+}
+
+.od-jd-out {
+	background: #ffffff;
+	border: 5rpx solid #ffffff;
+	height: 20rpx;
+	line-height: 20rpx;
+	border-radius: 50rpx;
+	overflow: hidden;
+	position: relative;
+}
+
+.od-jd-in {
+	height: 20rpx;
+	line-height: 20rpx;
+	border-radius: 50rpx;
+	overflow: hidden;
+	width: 0%;
+	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAyAAAAABCAIAAACpCl0xAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAHrSURBVHjadFVBcgMxCEP3Prtv6vfUrI1A2JvMtJPYGIQQgJ+/X0YgPh+uv/V1nTCI9ZORJthGaVyWrFehU9qX/cvP9d+d9Ieyf4uVqMxPRpf/jfm5SRs+vsxVzOd19Yq8gbmZrnaUJueJtrBjPHd+klJ3aNSRA8uAF0o8rnJg1ihOTizZ5tKeJttN7AHvKNYNu3jAWeJWyMVJKJ2T/9e4h+dR4vPJi4eLik2Rp4uhZOabjTNLK1IhreUzp8MFB8Mj06YaSwxU0Z8LsYQkVDfLmNWe1ZhWTHwcwcCYp0MNb9pbqt0pmkyWu4aBBdy0yLNXXorl6nbGfdqEpQydLz4oTm7N4xgFEXkUUhst68VhkpTw6YKpFnB+8CrLcZ6xNnMFuSLegU51Cm/pBkbOaLpVSND4FgbUcCihz5Igrh68dSL9LoaiNIxWqJ17W4XNjcLcspF2JbMYhLSQtvjwOmu6UZl9wtUEPX811zn1CGt1Sxv3KknFbZcZBTWqsqjDLHAkqx66V0mSUOqh2kmnsHL4oCHjy3iTWrLv1bYs1bF7xJpq20Snfw4T06EG+15qFJ3FftQIDMYlqeRjLC8czUWtbFiXsReJ+FVKYcSf67sHQl/5KGkaplpt/aiWyeK39WS2tJWL6CmUMv8XYABQPZBxCZSO0gAAAABJRU5ErkJggg==) repeat-y center;
+	background-size: 100%;
+}
+
+.od-jd-text {
+	text-align: center;
+	padding-top: 30rpx;
+}
+
+.od-jd-text text {
+	color: #ffffff;
+	font-size: 26rpx;
+	opacity: 0.7;
+}
+
+.od-jd-10 .od-jd-in {
+	width: 37%;
+}
+
+.od-jd-10 .od-jd-st-10 {
+	opacity: 1;
+	font-weight: bold;
+}
+
+.od-jd-20 .od-jd-in {
+	width: 64%;
+}
+
+.od-jd-20 .od-jd-st-20 {
+	opacity: 1;
+	font-weight: bold;
+}
+
+.od-jd-30 .od-jd-in {
+	width: 100%;
+}
+
+.od-jd-30 .od-jd-st-30 {
+	opacity: 1;
+	font-weight: bold;
+}
+
+.od-jd-40 .od-jd-in {
+	width: 100%;
+	background: #cccccc;
+}
+
+.od-st {
+	font-size: 40rpx;
+	font-weight: bold;
+}
+
+.od-stt {
+	font-size: 26rpx;
+}
+
+.od-op {
+	text-align: center;
+	padding: 40rpx 60rpx 0 60rpx;
+}
+
+.od-staff-avatar {
+	width: 100rpx;
+	height: 100rpx;
+	border-radius: 100rpx;
+	margin-right: 20rpx;
+}
+
+.od-box {
+	margin-top: 30rpx;
+	background: #ffffff;
+}
+
+.od-box-tt {
+	position: relative;
+	padding-left: 20rpx;
+	font-weight: bold;
+}
+
+.od-box-tt::before {
+	display: block;
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 8rpx;
+	height: 100%;
+	background: #0bb684;
+	border-radius: 10rpx;
+	overflow: hidden;
+}
+
+.od-box .weui-cells {
+	margin: 0;
+}
+
+.od-box .weui-cells::before {
+	display: none;
+}
+
+.od-box .weui-cells::after {
+	display: none;
+}
+
+.od-box .weui-cell::before {
+	display: none;
+}
+
+.od-box .weui-cell::after {
+	display: none;
+}
+
+.op-cells {
+	margin-top: 0;
+}
+
+.op-cells::before {
+	left: 30rpx;
+}
+
+.op-cells .weui-cell::before {
+	left: 30rpx;
+}
+
+.op-cells .weui-cell {
+	padding: 30rpx;
+}
+
+.order-status {
+	padding: 20px;
+	border-radius: 10px 10px 0 0;
+}
+
+.uni-popup__wrapper {
+	border-radius: 20rpx;
+}
+
+.text-center {
+	text-align: center;
+	margin-top: 20rpx;
+	margin-bottom: 20rpx;
+}
+
+.pay-box {
+	padding: 40rpx;
+}
+
+.pay-box canvas {
+	margin: 0 auto;
+}

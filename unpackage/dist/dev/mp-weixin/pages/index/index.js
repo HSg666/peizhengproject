@@ -49,7 +49,7 @@ const _sfc_main = {
     };
     const goHospitalDetail = (id) => {
       common_vendor.index.navigateTo({
-        url: "/pages/service/index?svid=1&hid=" + id
+        url: "/pages/hospital/index?svid=1&hid=" + id
       });
     };
     return (_ctx, _cache) => {

@@ -132,7 +132,7 @@
 	// 去医院详情
 	const goHospitalDetail = (id) => {
 		uni.navigateTo({
-			url: '/pages/service/index?svid=1&hid=' + id
+			url: '/pages/hospital/index?svid=1&hid=' + id
 		})
 	}
 </script>

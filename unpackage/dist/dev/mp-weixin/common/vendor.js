@@ -369,9 +369,9 @@ E.prototype = {
     return this;
   },
   once: function(name, callback, ctx) {
-    var self = this;
+    var self2 = this;
     function listener() {
-      self.off(name, listener);
+      self2.off(name, listener);
       callback.apply(ctx, arguments);
     }
     listener._ = callback;
@@ -2578,13 +2578,13 @@ class ComputedRefImpl {
     ] = isReadonly2;
   }
   get value() {
-    const self = toRaw(this);
-    trackRefValue(self);
-    if (self._dirty || !self._cacheable) {
-      self._dirty = false;
-      self._value = self.effect.run();
+    const self2 = toRaw(this);
+    trackRefValue(self2);
+    if (self2._dirty || !self2._cacheable) {
+      self2._dirty = false;
+      self2._value = self2.effect.run();
     }
-    return self._value;
+    return self2._value;
   }
   set value(newValue) {
     this._setter(newValue);
@@ -6033,6 +6033,10 @@ function stringify(styles) {
   }
   return ret;
 }
+function setRef(ref2, id, opts = {}) {
+  const { $templateRefs } = getCurrentInstance();
+  $templateRefs.push({ i: id, r: ref2, k: opts.k, f: opts.f });
+}
 const o = (value, key) => vOn(value, key);
 const f = (source, renderItem) => vFor(source, renderItem);
 const s = (value) => stringifyStyle(value);
@@ -6040,6 +6044,7 @@ const e = (target, ...sources) => extend(target, ...sources);
 const n = (value) => normalizeClass(value);
 const t = (val) => toDisplayString(val);
 const p = (props) => renderProps(props);
+const sr = (ref2, id, opts) => setRef(ref2, id, opts);
 function createApp$1(rootComponent, rootProps = null) {
   rootComponent && (rootComponent.mpType = "app");
   return createVueApp(rootComponent, rootProps).use(plugin);
@@ -6872,8 +6877,675 @@ const createSubpackageApp = initCreateSubpackageApp();
 const createHook = (lifecycle) => (hook, target = getCurrentInstance()) => {
   !isInSSRComponentSetup && injectHook(lifecycle, hook, target);
 };
+const onShow = /* @__PURE__ */ createHook(ON_SHOW);
 const onLoad = /* @__PURE__ */ createHook(ON_LOAD);
+var commonjsGlobal = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
+function getDefaultExportFromCjs(x) {
+  return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, "default") ? x["default"] : x;
+}
+var uqrcode = { exports: {} };
+(function(module2, exports2) {
+  !function(o2, e2) {
+    module2.exports = e2();
+  }(typeof window !== "undefined" ? window : commonjsGlobal, function() {
+    function o2(o3) {
+      this.mode = r.MODE_8BIT_BYTE, this.data = o3;
+    }
+    function e2(o3, e3) {
+      this.typeNumber = o3, this.errorCorrectLevel = e3, this.modules = null, this.moduleCount = 0, this.dataCache = null, this.dataList = new Array();
+    }
+    o2.prototype = { getLength: function(o3) {
+      return this.data.length;
+    }, write: function(o3) {
+      for (var e3 = 0; e3 < this.data.length; e3++)
+        o3.put(this.data.charCodeAt(e3), 8);
+    } }, e2.prototype = { addData: function(e3) {
+      var r2 = new o2(e3);
+      this.dataList.push(r2), this.dataCache = null;
+    }, isDark: function(o3, e3) {
+      if (o3 < 0 || this.moduleCount <= o3 || e3 < 0 || this.moduleCount <= e3)
+        throw new Error(o3 + "," + e3);
+      return this.modules[o3][e3];
+    }, getModuleCount: function() {
+      return this.moduleCount;
+    }, make: function() {
+      if (this.typeNumber < 1) {
+        var o3 = 1;
+        for (o3 = 1; o3 < 40; o3++) {
+          for (var e3 = v.getRSBlocks(o3, this.errorCorrectLevel), r2 = new p2(), t3 = 0, i2 = 0; i2 < e3.length; i2++)
+            t3 += e3[i2].dataCount;
+          for (i2 = 0; i2 < this.dataList.length; i2++) {
+            var n3 = this.dataList[i2];
+            r2.put(n3.mode, 4), r2.put(n3.getLength(), h.getLengthInBits(n3.mode, o3)), n3.write(r2);
+          }
+          if (r2.getLengthInBits() <= 8 * t3)
+            break;
+        }
+        this.typeNumber = o3;
+      }
+      this.makeImpl(false, this.getBestMaskPattern());
+    }, makeImpl: function(o3, r2) {
+      this.moduleCount = 4 * this.typeNumber + 17, this.modules = new Array(this.moduleCount);
+      for (var t3 = 0; t3 < this.moduleCount; t3++) {
+        this.modules[t3] = new Array(this.moduleCount);
+        for (var i2 = 0; i2 < this.moduleCount; i2++)
+          this.modules[t3][i2] = null;
+      }
+      this.setupPositionProbePattern(0, 0), this.setupPositionProbePattern(this.moduleCount - 7, 0), this.setupPositionProbePattern(0, this.moduleCount - 7), this.setupPositionAdjustPattern(), this.setupTimingPattern(), this.setupTypeInfo(o3, r2), this.typeNumber >= 7 && this.setupTypeNumber(o3), null == this.dataCache && (this.dataCache = e2.createData(this.typeNumber, this.errorCorrectLevel, this.dataList)), this.mapData(this.dataCache, r2);
+    }, setupPositionProbePattern: function(o3, e3) {
+      for (var r2 = -1; r2 <= 7; r2++)
+        if (!(o3 + r2 <= -1 || this.moduleCount <= o3 + r2))
+          for (var t3 = -1; t3 <= 7; t3++)
+            e3 + t3 <= -1 || this.moduleCount <= e3 + t3 || (this.modules[o3 + r2][e3 + t3] = 0 <= r2 && r2 <= 6 && (0 == t3 || 6 == t3) || 0 <= t3 && t3 <= 6 && (0 == r2 || 6 == r2) || 2 <= r2 && r2 <= 4 && 2 <= t3 && t3 <= 4);
+    }, getBestMaskPattern: function() {
+      for (var o3 = 0, e3 = 0, r2 = 0; r2 < 8; r2++) {
+        this.makeImpl(true, r2);
+        var t3 = h.getLostPoint(this);
+        (0 == r2 || o3 > t3) && (o3 = t3, e3 = r2);
+      }
+      return e3;
+    }, createMovieClip: function(o3, e3, r2) {
+      var t3 = o3.createEmptyMovieClip(e3, r2);
+      this.make();
+      for (var i2 = 0; i2 < this.modules.length; i2++)
+        for (var n3 = 1 * i2, a2 = 0; a2 < this.modules[i2].length; a2++) {
+          var d2 = 1 * a2;
+          this.modules[i2][a2] && (t3.beginFill(0, 100), t3.moveTo(d2, n3), t3.lineTo(d2 + 1, n3), t3.lineTo(d2 + 1, n3 + 1), t3.lineTo(d2, n3 + 1), t3.endFill());
+        }
+      return t3;
+    }, setupTimingPattern: function() {
+      for (var o3 = 8; o3 < this.moduleCount - 8; o3++)
+        null == this.modules[o3][6] && (this.modules[o3][6] = o3 % 2 == 0);
+      for (var e3 = 8; e3 < this.moduleCount - 8; e3++)
+        null == this.modules[6][e3] && (this.modules[6][e3] = e3 % 2 == 0);
+    }, setupPositionAdjustPattern: function() {
+      for (var o3 = h.getPatternPosition(this.typeNumber), e3 = 0; e3 < o3.length; e3++)
+        for (var r2 = 0; r2 < o3.length; r2++) {
+          var t3 = o3[e3], i2 = o3[r2];
+          if (null == this.modules[t3][i2])
+            for (var n3 = -2; n3 <= 2; n3++)
+              for (var a2 = -2; a2 <= 2; a2++)
+                this.modules[t3 + n3][i2 + a2] = -2 == n3 || 2 == n3 || -2 == a2 || 2 == a2 || 0 == n3 && 0 == a2;
+        }
+    }, setupTypeNumber: function(o3) {
+      for (var e3 = h.getBCHTypeNumber(this.typeNumber), r2 = 0; r2 < 18; r2++) {
+        var t3 = !o3 && 1 == (e3 >> r2 & 1);
+        this.modules[Math.floor(r2 / 3)][r2 % 3 + this.moduleCount - 8 - 3] = t3;
+      }
+      for (r2 = 0; r2 < 18; r2++) {
+        t3 = !o3 && 1 == (e3 >> r2 & 1);
+        this.modules[r2 % 3 + this.moduleCount - 8 - 3][Math.floor(r2 / 3)] = t3;
+      }
+    }, setupTypeInfo: function(o3, e3) {
+      for (var r2 = this.errorCorrectLevel << 3 | e3, t3 = h.getBCHTypeInfo(r2), i2 = 0; i2 < 15; i2++) {
+        var n3 = !o3 && 1 == (t3 >> i2 & 1);
+        i2 < 6 ? this.modules[i2][8] = n3 : i2 < 8 ? this.modules[i2 + 1][8] = n3 : this.modules[this.moduleCount - 15 + i2][8] = n3;
+      }
+      for (i2 = 0; i2 < 15; i2++) {
+        n3 = !o3 && 1 == (t3 >> i2 & 1);
+        i2 < 8 ? this.modules[8][this.moduleCount - i2 - 1] = n3 : i2 < 9 ? this.modules[8][15 - i2 - 1 + 1] = n3 : this.modules[8][15 - i2 - 1] = n3;
+      }
+      this.modules[this.moduleCount - 8][8] = !o3;
+    }, mapData: function(o3, e3) {
+      for (var r2 = -1, t3 = this.moduleCount - 1, i2 = 7, n3 = 0, a2 = this.moduleCount - 1; a2 > 0; a2 -= 2)
+        for (6 == a2 && a2--; ; ) {
+          for (var d2 = 0; d2 < 2; d2++)
+            if (null == this.modules[t3][a2 - d2]) {
+              var u2 = false;
+              n3 < o3.length && (u2 = 1 == (o3[n3] >>> i2 & 1)), h.getMask(e3, t3, a2 - d2) && (u2 = !u2), this.modules[t3][a2 - d2] = u2, -1 == --i2 && (n3++, i2 = 7);
+            }
+          if ((t3 += r2) < 0 || this.moduleCount <= t3) {
+            t3 -= r2, r2 = -r2;
+            break;
+          }
+        }
+    } }, e2.PAD0 = 236, e2.PAD1 = 17, e2.createData = function(o3, r2, t3) {
+      for (var i2 = v.getRSBlocks(o3, r2), n3 = new p2(), a2 = 0; a2 < t3.length; a2++) {
+        var d2 = t3[a2];
+        n3.put(d2.mode, 4), n3.put(d2.getLength(), h.getLengthInBits(d2.mode, o3)), d2.write(n3);
+      }
+      var u2 = 0;
+      for (a2 = 0; a2 < i2.length; a2++)
+        u2 += i2[a2].dataCount;
+      if (n3.getLengthInBits() > 8 * u2)
+        throw new Error("code length overflow. (" + n3.getLengthInBits() + ">" + 8 * u2 + ")");
+      for (n3.getLengthInBits() + 4 <= 8 * u2 && n3.put(0, 4); n3.getLengthInBits() % 8 != 0; )
+        n3.putBit(false);
+      for (; !(n3.getLengthInBits() >= 8 * u2 || (n3.put(e2.PAD0, 8), n3.getLengthInBits() >= 8 * u2)); )
+        n3.put(e2.PAD1, 8);
+      return e2.createBytes(n3, i2);
+    }, e2.createBytes = function(o3, e3) {
+      for (var r2 = 0, t3 = 0, i2 = 0, n3 = new Array(e3.length), a2 = new Array(e3.length), d2 = 0; d2 < e3.length; d2++) {
+        var u2 = e3[d2].dataCount, s3 = e3[d2].totalCount - u2;
+        t3 = Math.max(t3, u2), i2 = Math.max(i2, s3), n3[d2] = new Array(u2);
+        for (var g2 = 0; g2 < n3[d2].length; g2++)
+          n3[d2][g2] = 255 & o3.buffer[g2 + r2];
+        r2 += u2;
+        var l2 = h.getErrorCorrectPolynomial(s3), c2 = new f2(n3[d2], l2.getLength() - 1).mod(l2);
+        a2[d2] = new Array(l2.getLength() - 1);
+        for (g2 = 0; g2 < a2[d2].length; g2++) {
+          var m2 = g2 + c2.getLength() - a2[d2].length;
+          a2[d2][g2] = m2 >= 0 ? c2.get(m2) : 0;
+        }
+      }
+      var v2 = 0;
+      for (g2 = 0; g2 < e3.length; g2++)
+        v2 += e3[g2].totalCount;
+      var p3 = new Array(v2), C2 = 0;
+      for (g2 = 0; g2 < t3; g2++)
+        for (d2 = 0; d2 < e3.length; d2++)
+          g2 < n3[d2].length && (p3[C2++] = n3[d2][g2]);
+      for (g2 = 0; g2 < i2; g2++)
+        for (d2 = 0; d2 < e3.length; d2++)
+          g2 < a2[d2].length && (p3[C2++] = a2[d2][g2]);
+      return p3;
+    };
+    for (var r = { MODE_NUMBER: 1, MODE_ALPHA_NUM: 2, MODE_8BIT_BYTE: 4, MODE_KANJI: 8 }, t2 = { L: 1, M: 0, Q: 3, H: 2 }, i = 0, n2 = 1, a = 2, d = 3, u = 4, s2 = 5, g = 6, l = 7, h = { PATTERN_POSITION_TABLE: [[], [6, 18], [6, 22], [6, 26], [6, 30], [6, 34], [6, 22, 38], [6, 24, 42], [6, 26, 46], [6, 28, 50], [6, 30, 54], [6, 32, 58], [6, 34, 62], [6, 26, 46, 66], [6, 26, 48, 70], [6, 26, 50, 74], [6, 30, 54, 78], [6, 30, 56, 82], [6, 30, 58, 86], [6, 34, 62, 90], [6, 28, 50, 72, 94], [6, 26, 50, 74, 98], [6, 30, 54, 78, 102], [6, 28, 54, 80, 106], [6, 32, 58, 84, 110], [6, 30, 58, 86, 114], [6, 34, 62, 90, 118], [6, 26, 50, 74, 98, 122], [6, 30, 54, 78, 102, 126], [6, 26, 52, 78, 104, 130], [6, 30, 56, 82, 108, 134], [6, 34, 60, 86, 112, 138], [6, 30, 58, 86, 114, 142], [6, 34, 62, 90, 118, 146], [6, 30, 54, 78, 102, 126, 150], [6, 24, 50, 76, 102, 128, 154], [6, 28, 54, 80, 106, 132, 158], [6, 32, 58, 84, 110, 136, 162], [6, 26, 54, 82, 110, 138, 166], [6, 30, 58, 86, 114, 142, 170]], G15: 1335, G18: 7973, G15_MASK: 21522, getBCHTypeInfo: function(o3) {
+      for (var e3 = o3 << 10; h.getBCHDigit(e3) - h.getBCHDigit(h.G15) >= 0; )
+        e3 ^= h.G15 << h.getBCHDigit(e3) - h.getBCHDigit(h.G15);
+      return (o3 << 10 | e3) ^ h.G15_MASK;
+    }, getBCHTypeNumber: function(o3) {
+      for (var e3 = o3 << 12; h.getBCHDigit(e3) - h.getBCHDigit(h.G18) >= 0; )
+        e3 ^= h.G18 << h.getBCHDigit(e3) - h.getBCHDigit(h.G18);
+      return o3 << 12 | e3;
+    }, getBCHDigit: function(o3) {
+      for (var e3 = 0; 0 != o3; )
+        e3++, o3 >>>= 1;
+      return e3;
+    }, getPatternPosition: function(o3) {
+      return h.PATTERN_POSITION_TABLE[o3 - 1];
+    }, getMask: function(o3, e3, r2) {
+      switch (o3) {
+        case i:
+          return (e3 + r2) % 2 == 0;
+        case n2:
+          return e3 % 2 == 0;
+        case a:
+          return r2 % 3 == 0;
+        case d:
+          return (e3 + r2) % 3 == 0;
+        case u:
+          return (Math.floor(e3 / 2) + Math.floor(r2 / 3)) % 2 == 0;
+        case s2:
+          return e3 * r2 % 2 + e3 * r2 % 3 == 0;
+        case g:
+          return (e3 * r2 % 2 + e3 * r2 % 3) % 2 == 0;
+        case l:
+          return (e3 * r2 % 3 + (e3 + r2) % 2) % 2 == 0;
+        default:
+          throw new Error("bad maskPattern:" + o3);
+      }
+    }, getErrorCorrectPolynomial: function(o3) {
+      for (var e3 = new f2([1], 0), r2 = 0; r2 < o3; r2++)
+        e3 = e3.multiply(new f2([1, c.gexp(r2)], 0));
+      return e3;
+    }, getLengthInBits: function(o3, e3) {
+      if (1 <= e3 && e3 < 10)
+        switch (o3) {
+          case r.MODE_NUMBER:
+            return 10;
+          case r.MODE_ALPHA_NUM:
+            return 9;
+          case r.MODE_8BIT_BYTE:
+          case r.MODE_KANJI:
+            return 8;
+          default:
+            throw new Error("mode:" + o3);
+        }
+      else if (e3 < 27)
+        switch (o3) {
+          case r.MODE_NUMBER:
+            return 12;
+          case r.MODE_ALPHA_NUM:
+            return 11;
+          case r.MODE_8BIT_BYTE:
+            return 16;
+          case r.MODE_KANJI:
+            return 10;
+          default:
+            throw new Error("mode:" + o3);
+        }
+      else {
+        if (!(e3 < 41))
+          throw new Error("type:" + e3);
+        switch (o3) {
+          case r.MODE_NUMBER:
+            return 14;
+          case r.MODE_ALPHA_NUM:
+            return 13;
+          case r.MODE_8BIT_BYTE:
+            return 16;
+          case r.MODE_KANJI:
+            return 12;
+          default:
+            throw new Error("mode:" + o3);
+        }
+      }
+    }, getLostPoint: function(o3) {
+      for (var e3 = o3.getModuleCount(), r2 = 0, t3 = 0; t3 < e3; t3++)
+        for (var i2 = 0; i2 < e3; i2++) {
+          for (var n3 = 0, a2 = o3.isDark(t3, i2), d2 = -1; d2 <= 1; d2++)
+            if (!(t3 + d2 < 0 || e3 <= t3 + d2))
+              for (var u2 = -1; u2 <= 1; u2++)
+                i2 + u2 < 0 || e3 <= i2 + u2 || 0 == d2 && 0 == u2 || a2 == o3.isDark(t3 + d2, i2 + u2) && n3++;
+          n3 > 5 && (r2 += 3 + n3 - 5);
+        }
+      for (t3 = 0; t3 < e3 - 1; t3++)
+        for (i2 = 0; i2 < e3 - 1; i2++) {
+          var s3 = 0;
+          o3.isDark(t3, i2) && s3++, o3.isDark(t3 + 1, i2) && s3++, o3.isDark(t3, i2 + 1) && s3++, o3.isDark(t3 + 1, i2 + 1) && s3++, 0 != s3 && 4 != s3 || (r2 += 3);
+        }
+      for (t3 = 0; t3 < e3; t3++)
+        for (i2 = 0; i2 < e3 - 6; i2++)
+          o3.isDark(t3, i2) && !o3.isDark(t3, i2 + 1) && o3.isDark(t3, i2 + 2) && o3.isDark(t3, i2 + 3) && o3.isDark(t3, i2 + 4) && !o3.isDark(t3, i2 + 5) && o3.isDark(t3, i2 + 6) && (r2 += 40);
+      for (i2 = 0; i2 < e3; i2++)
+        for (t3 = 0; t3 < e3 - 6; t3++)
+          o3.isDark(t3, i2) && !o3.isDark(t3 + 1, i2) && o3.isDark(t3 + 2, i2) && o3.isDark(t3 + 3, i2) && o3.isDark(t3 + 4, i2) && !o3.isDark(t3 + 5, i2) && o3.isDark(t3 + 6, i2) && (r2 += 40);
+      var g2 = 0;
+      for (i2 = 0; i2 < e3; i2++)
+        for (t3 = 0; t3 < e3; t3++)
+          o3.isDark(t3, i2) && g2++;
+      return r2 += 10 * (Math.abs(100 * g2 / e3 / e3 - 50) / 5);
+    } }, c = { glog: function(o3) {
+      if (o3 < 1)
+        throw new Error("glog(" + o3 + ")");
+      return c.LOG_TABLE[o3];
+    }, gexp: function(o3) {
+      for (; o3 < 0; )
+        o3 += 255;
+      for (; o3 >= 256; )
+        o3 -= 255;
+      return c.EXP_TABLE[o3];
+    }, EXP_TABLE: new Array(256), LOG_TABLE: new Array(256) }, m = 0; m < 8; m++)
+      c.EXP_TABLE[m] = 1 << m;
+    for (m = 8; m < 256; m++)
+      c.EXP_TABLE[m] = c.EXP_TABLE[m - 4] ^ c.EXP_TABLE[m - 5] ^ c.EXP_TABLE[m - 6] ^ c.EXP_TABLE[m - 8];
+    for (m = 0; m < 255; m++)
+      c.LOG_TABLE[c.EXP_TABLE[m]] = m;
+    function f2(o3, e3) {
+      if (null == o3.length)
+        throw new Error(o3.length + "/" + e3);
+      for (var r2 = 0; r2 < o3.length && 0 == o3[r2]; )
+        r2++;
+      this.num = new Array(o3.length - r2 + e3);
+      for (var t3 = 0; t3 < o3.length - r2; t3++)
+        this.num[t3] = o3[t3 + r2];
+    }
+    function v(o3, e3) {
+      this.totalCount = o3, this.dataCount = e3;
+    }
+    function p2() {
+      this.buffer = new Array(), this.length = 0;
+    }
+    function C(o3) {
+      return o3.setFillStyle = o3.setFillStyle || function(e3) {
+        o3.fillStyle = e3;
+      }, o3.setFontSize = o3.setFontSize || function(e3) {
+        o3.font = `${e3}px`;
+      }, o3.setTextAlign = o3.setTextAlign || function(e3) {
+        o3.textAlign = e3;
+      }, o3.setTextBaseline = o3.setTextBaseline || function(e3) {
+        o3.textBaseline = e3;
+      }, o3.setGlobalAlpha = o3.setGlobalAlpha || function(e3) {
+        o3.globalAlpha = e3;
+      }, o3.setStrokeStyle = o3.setStrokeStyle || function(e3) {
+        o3.strokeStyle = e3;
+      }, o3.setShadow = o3.setShadow || function(e3, r2, t3, i2) {
+        o3.shadowOffsetX = e3, o3.shadowOffsetY = r2, o3.shadowBlur = t3, o3.shadowColor = i2;
+      }, o3.draw = o3.draw || function(o4, e3) {
+        e3 && e3();
+      }, o3;
+    }
+    function b(o3, e3) {
+      var r2 = this.data = "";
+      this.dataEncode = true;
+      var t3 = this.size = 200;
+      this.useDynamicSize = false, this.dynamicSize = t3;
+      var i2 = this.typeNumber = -1;
+      this.errorCorrectLevel = b.errorCorrectLevel.H;
+      var n3 = this.margin = 0;
+      this.areaColor = "#FFFFFF", this.backgroundColor = "rgba(255,255,255,0)", this.backgroundImageSrc = void 0;
+      var a2 = this.backgroundImageWidth = void 0, d2 = this.backgroundImageHeight = void 0, u2 = this.backgroundImageX = void 0, s3 = this.backgroundImageY = void 0;
+      this.backgroundImageAlpha = 1, this.backgroundImageBorderRadius = 0;
+      var g2 = this.backgroundPadding = 0;
+      this.foregroundColor = "#000000", this.foregroundImageSrc = void 0;
+      var l2 = this.foregroundImageWidth = void 0, h2 = this.foregroundImageHeight = void 0, c2 = this.foregroundImageX = void 0, m2 = this.foregroundImageY = void 0, f3 = this.foregroundImagePadding = 0;
+      this.foregroundImageBackgroundColor = "#FFFFFF";
+      var v2 = this.foregroundImageBorderRadius = 0, p3 = this.foregroundImageShadowOffsetX = 0, y = this.foregroundImageShadowOffsetY = 0, k = this.foregroundImageShadowBlur = 0;
+      this.foregroundImageShadowColor = "#808080";
+      var w = this.foregroundPadding = 0, I = this.positionProbeBackgroundColor = void 0, B = this.positionProbeForegroundColor = void 0, S = this.separatorColor = void 0, P = this.positionAdjustBackgroundColor = void 0, E2 = this.positionAdjustForegroundColor = void 0, L = this.timingBackgroundColor = void 0, D = this.timingForegroundColor = void 0, T = this.typeNumberBackgroundColor = void 0, A = this.typeNumberForegroundColor = void 0, N = this.darkBlockColor = void 0;
+      this.base = void 0, this.modules = [], this.moduleCount = 0, this.drawModules = [];
+      var M = this.canvasContext = void 0;
+      this.loadImage, this.drawReserve = false, this.isMaked = false, Object.defineProperties(this, { data: { get() {
+        if ("" === r2 || void 0 === r2)
+          throw console.error("[uQRCode]: data must be set!"), new b.Error("data must be set!");
+        return r2;
+      }, set(o4) {
+        r2 = String(o4);
+      } }, size: { get: () => t3, set(o4) {
+        t3 = Number(o4);
+      } }, typeNumber: { get: () => i2, set(o4) {
+        i2 = Number(o4);
+      } }, margin: { get: () => n3, set(o4) {
+        n3 = Number(o4);
+      } }, backgroundImageWidth: { get() {
+        return void 0 === a2 ? this.dynamicSize : this.useDynamicSize ? this.dynamicSize / this.size * a2 : a2;
+      }, set(o4) {
+        a2 = Number(o4);
+      } }, backgroundImageHeight: { get() {
+        return void 0 === d2 ? this.dynamicSize : this.useDynamicSize ? this.dynamicSize / this.size * d2 : d2;
+      }, set(o4) {
+        d2 = Number(o4);
+      } }, backgroundImageX: { get() {
+        return void 0 === u2 ? 0 : this.useDynamicSize ? this.dynamicSize / this.size * u2 : u2;
+      }, set(o4) {
+        u2 = Number(o4);
+      } }, backgroundImageY: { get() {
+        return void 0 === s3 ? 0 : this.useDynamicSize ? this.dynamicSize / this.size * s3 : s3;
+      }, set(o4) {
+        s3 = Number(o4);
+      } }, backgroundPadding: { get: () => g2, set(o4) {
+        g2 = o4 > 1 ? 1 : o4 < 0 ? 0 : o4;
+      } }, foregroundImageWidth: { get() {
+        return void 0 === l2 ? (this.dynamicSize - 2 * this.margin) / 4 : this.useDynamicSize ? this.dynamicSize / this.size * l2 : l2;
+      }, set(o4) {
+        l2 = Number(o4);
+      } }, foregroundImageHeight: { get() {
+        return void 0 === h2 ? (this.dynamicSize - 2 * this.margin) / 4 : this.useDynamicSize ? this.dynamicSize / this.size * h2 : h2;
+      }, set(o4) {
+        h2 = Number(o4);
+      } }, foregroundImageX: { get() {
+        return void 0 === c2 ? this.dynamicSize / 2 - this.foregroundImageWidth / 2 : this.useDynamicSize ? this.dynamicSize / this.size * c2 : c2;
+      }, set(o4) {
+        c2 = Number(o4);
+      } }, foregroundImageY: { get() {
+        return void 0 === m2 ? this.dynamicSize / 2 - this.foregroundImageHeight / 2 : this.useDynamicSize ? this.dynamicSize / this.size * m2 : m2;
+      }, set(o4) {
+        m2 = Number(o4);
+      } }, foregroundImagePadding: { get() {
+        return this.useDynamicSize ? this.dynamicSize / this.size * f3 : f3;
+      }, set(o4) {
+        f3 = Number(o4);
+      } }, foregroundImageBorderRadius: { get() {
+        return this.useDynamicSize ? this.dynamicSize / this.size * v2 : v2;
+      }, set(o4) {
+        v2 = Number(o4);
+      } }, foregroundImageShadowOffsetX: { get() {
+        return this.useDynamicSize ? this.dynamicSize / this.size * p3 : p3;
+      }, set(o4) {
+        p3 = Number(o4);
+      } }, foregroundImageShadowOffsetY: { get() {
+        return this.useDynamicSize ? this.dynamicSize / this.size * y : y;
+      }, set(o4) {
+        y = Number(o4);
+      } }, foregroundImageShadowBlur: { get() {
+        return this.useDynamicSize ? this.dynamicSize / this.size * k : k;
+      }, set(o4) {
+        k = Number(o4);
+      } }, foregroundPadding: { get: () => w, set(o4) {
+        w = o4 > 1 ? 1 : o4 < 0 ? 0 : o4;
+      } }, positionProbeBackgroundColor: { get() {
+        return I || this.backgroundColor;
+      }, set(o4) {
+        I = o4;
+      } }, positionProbeForegroundColor: { get() {
+        return B || this.foregroundColor;
+      }, set(o4) {
+        B = o4;
+      } }, separatorColor: { get() {
+        return S || this.backgroundColor;
+      }, set(o4) {
+        S = o4;
+      } }, positionAdjustBackgroundColor: { get() {
+        return P || this.backgroundColor;
+      }, set(o4) {
+        P = o4;
+      } }, positionAdjustForegroundColor: { get() {
+        return E2 || this.foregroundColor;
+      }, set(o4) {
+        E2 = o4;
+      } }, timingBackgroundColor: { get() {
+        return L || this.backgroundColor;
+      }, set(o4) {
+        L = o4;
+      } }, timingForegroundColor: { get() {
+        return D || this.foregroundColor;
+      }, set(o4) {
+        D = o4;
+      } }, typeNumberBackgroundColor: { get() {
+        return T || this.backgroundColor;
+      }, set(o4) {
+        T = o4;
+      } }, typeNumberForegroundColor: { get() {
+        return A || this.foregroundColor;
+      }, set(o4) {
+        A = o4;
+      } }, darkBlockColor: { get() {
+        return N || this.foregroundColor;
+      }, set(o4) {
+        N = o4;
+      } }, canvasContext: { get() {
+        if (void 0 === M)
+          throw console.error("[uQRCode]: use drawCanvas, you need to set the canvasContext!"), new b.Error("use drawCanvas, you need to set the canvasContext!");
+        return M;
+      }, set(o4) {
+        M = C(o4);
+      } } }), b.plugins.forEach((o4) => o4(b, this, false)), o3 && this.setOptions(o3), e3 && (this.canvasContext = C(e3));
+    }
+    return f2.prototype = { get: function(o3) {
+      return this.num[o3];
+    }, getLength: function() {
+      return this.num.length;
+    }, multiply: function(o3) {
+      for (var e3 = new Array(this.getLength() + o3.getLength() - 1), r2 = 0; r2 < this.getLength(); r2++)
+        for (var t3 = 0; t3 < o3.getLength(); t3++)
+          e3[r2 + t3] ^= c.gexp(c.glog(this.get(r2)) + c.glog(o3.get(t3)));
+      return new f2(e3, 0);
+    }, mod: function(o3) {
+      if (this.getLength() - o3.getLength() < 0)
+        return this;
+      for (var e3 = c.glog(this.get(0)) - c.glog(o3.get(0)), r2 = new Array(this.getLength()), t3 = 0; t3 < this.getLength(); t3++)
+        r2[t3] = this.get(t3);
+      for (t3 = 0; t3 < o3.getLength(); t3++)
+        r2[t3] ^= c.gexp(c.glog(o3.get(t3)) + e3);
+      return new f2(r2, 0).mod(o3);
+    } }, v.RS_BLOCK_TABLE = [[1, 26, 19], [1, 26, 16], [1, 26, 13], [1, 26, 9], [1, 44, 34], [1, 44, 28], [1, 44, 22], [1, 44, 16], [1, 70, 55], [1, 70, 44], [2, 35, 17], [2, 35, 13], [1, 100, 80], [2, 50, 32], [2, 50, 24], [4, 25, 9], [1, 134, 108], [2, 67, 43], [2, 33, 15, 2, 34, 16], [2, 33, 11, 2, 34, 12], [2, 86, 68], [4, 43, 27], [4, 43, 19], [4, 43, 15], [2, 98, 78], [4, 49, 31], [2, 32, 14, 4, 33, 15], [4, 39, 13, 1, 40, 14], [2, 121, 97], [2, 60, 38, 2, 61, 39], [4, 40, 18, 2, 41, 19], [4, 40, 14, 2, 41, 15], [2, 146, 116], [3, 58, 36, 2, 59, 37], [4, 36, 16, 4, 37, 17], [4, 36, 12, 4, 37, 13], [2, 86, 68, 2, 87, 69], [4, 69, 43, 1, 70, 44], [6, 43, 19, 2, 44, 20], [6, 43, 15, 2, 44, 16], [4, 101, 81], [1, 80, 50, 4, 81, 51], [4, 50, 22, 4, 51, 23], [3, 36, 12, 8, 37, 13], [2, 116, 92, 2, 117, 93], [6, 58, 36, 2, 59, 37], [4, 46, 20, 6, 47, 21], [7, 42, 14, 4, 43, 15], [4, 133, 107], [8, 59, 37, 1, 60, 38], [8, 44, 20, 4, 45, 21], [12, 33, 11, 4, 34, 12], [3, 145, 115, 1, 146, 116], [4, 64, 40, 5, 65, 41], [11, 36, 16, 5, 37, 17], [11, 36, 12, 5, 37, 13], [5, 109, 87, 1, 110, 88], [5, 65, 41, 5, 66, 42], [5, 54, 24, 7, 55, 25], [11, 36, 12], [5, 122, 98, 1, 123, 99], [7, 73, 45, 3, 74, 46], [15, 43, 19, 2, 44, 20], [3, 45, 15, 13, 46, 16], [1, 135, 107, 5, 136, 108], [10, 74, 46, 1, 75, 47], [1, 50, 22, 15, 51, 23], [2, 42, 14, 17, 43, 15], [5, 150, 120, 1, 151, 121], [9, 69, 43, 4, 70, 44], [17, 50, 22, 1, 51, 23], [2, 42, 14, 19, 43, 15], [3, 141, 113, 4, 142, 114], [3, 70, 44, 11, 71, 45], [17, 47, 21, 4, 48, 22], [9, 39, 13, 16, 40, 14], [3, 135, 107, 5, 136, 108], [3, 67, 41, 13, 68, 42], [15, 54, 24, 5, 55, 25], [15, 43, 15, 10, 44, 16], [4, 144, 116, 4, 145, 117], [17, 68, 42], [17, 50, 22, 6, 51, 23], [19, 46, 16, 6, 47, 17], [2, 139, 111, 7, 140, 112], [17, 74, 46], [7, 54, 24, 16, 55, 25], [34, 37, 13], [4, 151, 121, 5, 152, 122], [4, 75, 47, 14, 76, 48], [11, 54, 24, 14, 55, 25], [16, 45, 15, 14, 46, 16], [6, 147, 117, 4, 148, 118], [6, 73, 45, 14, 74, 46], [11, 54, 24, 16, 55, 25], [30, 46, 16, 2, 47, 17], [8, 132, 106, 4, 133, 107], [8, 75, 47, 13, 76, 48], [7, 54, 24, 22, 55, 25], [22, 45, 15, 13, 46, 16], [10, 142, 114, 2, 143, 115], [19, 74, 46, 4, 75, 47], [28, 50, 22, 6, 51, 23], [33, 46, 16, 4, 47, 17], [8, 152, 122, 4, 153, 123], [22, 73, 45, 3, 74, 46], [8, 53, 23, 26, 54, 24], [12, 45, 15, 28, 46, 16], [3, 147, 117, 10, 148, 118], [3, 73, 45, 23, 74, 46], [4, 54, 24, 31, 55, 25], [11, 45, 15, 31, 46, 16], [7, 146, 116, 7, 147, 117], [21, 73, 45, 7, 74, 46], [1, 53, 23, 37, 54, 24], [19, 45, 15, 26, 46, 16], [5, 145, 115, 10, 146, 116], [19, 75, 47, 10, 76, 48], [15, 54, 24, 25, 55, 25], [23, 45, 15, 25, 46, 16], [13, 145, 115, 3, 146, 116], [2, 74, 46, 29, 75, 47], [42, 54, 24, 1, 55, 25], [23, 45, 15, 28, 46, 16], [17, 145, 115], [10, 74, 46, 23, 75, 47], [10, 54, 24, 35, 55, 25], [19, 45, 15, 35, 46, 16], [17, 145, 115, 1, 146, 116], [14, 74, 46, 21, 75, 47], [29, 54, 24, 19, 55, 25], [11, 45, 15, 46, 46, 16], [13, 145, 115, 6, 146, 116], [14, 74, 46, 23, 75, 47], [44, 54, 24, 7, 55, 25], [59, 46, 16, 1, 47, 17], [12, 151, 121, 7, 152, 122], [12, 75, 47, 26, 76, 48], [39, 54, 24, 14, 55, 25], [22, 45, 15, 41, 46, 16], [6, 151, 121, 14, 152, 122], [6, 75, 47, 34, 76, 48], [46, 54, 24, 10, 55, 25], [2, 45, 15, 64, 46, 16], [17, 152, 122, 4, 153, 123], [29, 74, 46, 14, 75, 47], [49, 54, 24, 10, 55, 25], [24, 45, 15, 46, 46, 16], [4, 152, 122, 18, 153, 123], [13, 74, 46, 32, 75, 47], [48, 54, 24, 14, 55, 25], [42, 45, 15, 32, 46, 16], [20, 147, 117, 4, 148, 118], [40, 75, 47, 7, 76, 48], [43, 54, 24, 22, 55, 25], [10, 45, 15, 67, 46, 16], [19, 148, 118, 6, 149, 119], [18, 75, 47, 31, 76, 48], [34, 54, 24, 34, 55, 25], [20, 45, 15, 61, 46, 16]], v.getRSBlocks = function(o3, e3) {
+      var r2 = v.getRsBlockTable(o3, e3);
+      if (null == r2)
+        throw new Error("bad rs block @ typeNumber:" + o3 + "/errorCorrectLevel:" + e3);
+      for (var t3 = r2.length / 3, i2 = new Array(), n3 = 0; n3 < t3; n3++)
+        for (var a2 = r2[3 * n3 + 0], d2 = r2[3 * n3 + 1], u2 = r2[3 * n3 + 2], s3 = 0; s3 < a2; s3++)
+          i2.push(new v(d2, u2));
+      return i2;
+    }, v.getRsBlockTable = function(o3, e3) {
+      switch (e3) {
+        case t2.L:
+          return v.RS_BLOCK_TABLE[4 * (o3 - 1) + 0];
+        case t2.M:
+          return v.RS_BLOCK_TABLE[4 * (o3 - 1) + 1];
+        case t2.Q:
+          return v.RS_BLOCK_TABLE[4 * (o3 - 1) + 2];
+        case t2.H:
+          return v.RS_BLOCK_TABLE[4 * (o3 - 1) + 3];
+        default:
+          return;
+      }
+    }, p2.prototype = { get: function(o3) {
+      var e3 = Math.floor(o3 / 8);
+      return 1 == (this.buffer[e3] >>> 7 - o3 % 8 & 1);
+    }, put: function(o3, e3) {
+      for (var r2 = 0; r2 < e3; r2++)
+        this.putBit(1 == (o3 >>> e3 - r2 - 1 & 1));
+    }, getLengthInBits: function() {
+      return this.length;
+    }, putBit: function(o3) {
+      var e3 = Math.floor(this.length / 8);
+      this.buffer.length <= e3 && this.buffer.push(0), o3 && (this.buffer[e3] |= 128 >>> this.length % 8), this.length++;
+    } }, e2.errorCorrectLevel = t2, b.errorCorrectLevel = e2.errorCorrectLevel, b.Error = function(o3) {
+      this.errMsg = "[uQRCode]: " + o3;
+    }, b.plugins = [], b.use = function(o3) {
+      "function" == typeof o3 && b.plugins.push(o3);
+    }, b.prototype.loadImage = function(o3) {
+      return Promise.resolve(o3);
+    }, b.prototype.setOptions = function(o3) {
+      var e3, r2, t3, i2, n3, a2, d2, u2, s3, g2, l2, h2, c2, m2, f3, v2, p3, C2, b2, y, k, w, I, B, S, P, E2, L, D, T, A, N, M, z, _, O, R, x, F, H, X, Y, j, W, G, K, Q, U, $, J, q, V, Z, oo, eo, ro;
+      o3 && (Object.keys(o3).forEach((e4) => {
+        this[e4] = o3[e4];
+      }), function(o4 = {}, e4 = {}, r3 = false) {
+        let t4;
+        for (var i3 in t4 = r3 ? o4 : { ...o4 }, e4) {
+          var n4 = e4[i3];
+          null != n4 && (n4.constructor == Object ? t4[i3] = this.deepReplace(t4[i3], n4) : n4.constructor != String || n4 ? t4[i3] = n4 : t4[i3] = t4[i3]);
+        }
+      }(this, { data: o3.data || o3.text, dataEncode: o3.dataEncode, size: o3.size, useDynamicSize: o3.useDynamicSize, typeNumber: o3.typeNumber, errorCorrectLevel: o3.errorCorrectLevel, margin: o3.margin, areaColor: o3.areaColor, backgroundColor: o3.backgroundColor || (null === (e3 = o3.background) || void 0 === e3 ? void 0 : e3.color), backgroundImageSrc: o3.backgroundImageSrc || (null === (r2 = o3.background) || void 0 === r2 || null === (t3 = r2.image) || void 0 === t3 ? void 0 : t3.src), backgroundImageWidth: o3.backgroundImageWidth || (null === (i2 = o3.background) || void 0 === i2 || null === (n3 = i2.image) || void 0 === n3 ? void 0 : n3.width), backgroundImageHeight: o3.backgroundImageHeight || (null === (a2 = o3.background) || void 0 === a2 || null === (d2 = a2.image) || void 0 === d2 ? void 0 : d2.height), backgroundImageX: o3.backgroundImageX || (null === (u2 = o3.background) || void 0 === u2 || null === (s3 = u2.image) || void 0 === s3 ? void 0 : s3.x), backgroundImageY: o3.backgroundImageY || (null === (g2 = o3.background) || void 0 === g2 || null === (l2 = g2.image) || void 0 === l2 ? void 0 : l2.y), backgroundImageAlpha: o3.backgroundImageAlpha || (null === (h2 = o3.background) || void 0 === h2 || null === (c2 = h2.image) || void 0 === c2 ? void 0 : c2.alpha), backgroundImageBorderRadius: o3.backgroundImageBorderRadius || (null === (m2 = o3.background) || void 0 === m2 || null === (f3 = m2.image) || void 0 === f3 ? void 0 : f3.borderRadius), backgroundPadding: o3.backgroundPadding, foregroundColor: o3.foregroundColor || (null === (v2 = o3.foreground) || void 0 === v2 ? void 0 : v2.color), foregroundImageSrc: o3.foregroundImageSrc || (null === (p3 = o3.foreground) || void 0 === p3 || null === (C2 = p3.image) || void 0 === C2 ? void 0 : C2.src), foregroundImageWidth: o3.foregroundImageWidth || (null === (b2 = o3.foreground) || void 0 === b2 || null === (y = b2.image) || void 0 === y ? void 0 : y.width), foregroundImageHeight: o3.foregroundImageHeight || (null === (k = o3.foreground) || void 0 === k || null === (w = k.image) || void 0 === w ? void 0 : w.height), foregroundImageX: o3.foregroundImageX || (null === (I = o3.foreground) || void 0 === I || null === (B = I.image) || void 0 === B ? void 0 : B.x), foregroundImageY: o3.foregroundImageY || (null === (S = o3.foreground) || void 0 === S || null === (P = S.image) || void 0 === P ? void 0 : P.y), foregroundImagePadding: o3.foregroundImagePadding || (null === (E2 = o3.foreground) || void 0 === E2 || null === (L = E2.image) || void 0 === L ? void 0 : L.padding), foregroundImageBackgroundColor: o3.foregroundImageBackgroundColor || (null === (D = o3.foreground) || void 0 === D || null === (T = D.image) || void 0 === T ? void 0 : T.backgroundColor), foregroundImageBorderRadius: o3.foregroundImageBorderRadius || (null === (A = o3.foreground) || void 0 === A || null === (N = A.image) || void 0 === N ? void 0 : N.borderRadius), foregroundImageShadowOffsetX: o3.foregroundImageShadowOffsetX || (null === (M = o3.foreground) || void 0 === M || null === (z = M.image) || void 0 === z ? void 0 : z.shadowOffsetX), foregroundImageShadowOffsetY: o3.foregroundImageShadowOffsetY || (null === (_ = o3.foreground) || void 0 === _ || null === (O = _.image) || void 0 === O ? void 0 : O.shadowOffsetY), foregroundImageShadowBlur: o3.foregroundImageShadowBlur || (null === (R = o3.foreground) || void 0 === R || null === (x = R.image) || void 0 === x ? void 0 : x.shadowBlur), foregroundImageShadowColor: o3.foregroundImageShadowColor || (null === (F = o3.foreground) || void 0 === F || null === (H = F.image) || void 0 === H ? void 0 : H.shadowColor), foregroundPadding: o3.foregroundPadding, positionProbeBackgroundColor: o3.positionProbeBackgroundColor || (null === (X = o3.positionProbe) || void 0 === X ? void 0 : X.backgroundColor) || (null === (Y = o3.positionDetection) || void 0 === Y ? void 0 : Y.backgroundColor), positionProbeForegroundColor: o3.positionProbeForegroundColor || (null === (j = o3.positionProbe) || void 0 === j ? void 0 : j.foregroundColor) || (null === (W = o3.positionDetection) || void 0 === W ? void 0 : W.foregroundColor), separatorColor: o3.separatorColor || (null === (G = o3.separator) || void 0 === G ? void 0 : G.color), positionAdjustBackgroundColor: o3.positionAdjustBackgroundColor || (null === (K = o3.positionAdjust) || void 0 === K ? void 0 : K.backgroundColor) || (null === (Q = o3.alignment) || void 0 === Q ? void 0 : Q.backgroundColor), positionAdjustForegroundColor: o3.positionAdjustForegroundColor || (null === (U = o3.positionAdjust) || void 0 === U ? void 0 : U.foregroundColor) || (null === ($ = o3.alignment) || void 0 === $ ? void 0 : $.foregroundColor), timingBackgroundColor: o3.timingBackgroundColor || (null === (J = o3.timing) || void 0 === J ? void 0 : J.backgroundColor), timingForegroundColor: o3.timingForegroundColor || (null === (q = o3.timing) || void 0 === q ? void 0 : q.foregroundColor), typeNumberBackgroundColor: o3.typeNumberBackgroundColor || (null === (V = o3.typeNumber) || void 0 === V ? void 0 : V.backgroundColor) || (null === (Z = o3.versionInformation) || void 0 === Z ? void 0 : Z.backgroundColor), typeNumberForegroundColor: o3.typeNumberForegroundColor || (null === (oo = o3.typeNumber) || void 0 === oo ? void 0 : oo.foregroundColor) || (null === (eo = o3.versionInformation) || void 0 === eo ? void 0 : eo.foregroundColor), darkBlockColor: o3.darkBlockColor || (null === (ro = o3.darkBlock) || void 0 === ro ? void 0 : ro.color) }, true));
+    }, b.prototype.make = function() {
+      let { foregroundColor: o3, backgroundColor: r2, typeNumber: t3, errorCorrectLevel: i2, data: n3, dataEncode: a2, size: d2, margin: u2, useDynamicSize: s3 } = this;
+      if (o3 === r2)
+        throw console.error("[uQRCode]: foregroundColor and backgroundColor cannot be the same!"), new b.Error("foregroundColor and backgroundColor cannot be the same!");
+      a2 && (n3 = function(o4) {
+        o4 = o4.toString();
+        for (var e3, r3 = "", t4 = 0; t4 < o4.length; t4++)
+          (e3 = o4.charCodeAt(t4)) >= 1 && e3 <= 127 ? r3 += o4.charAt(t4) : e3 > 2047 ? (r3 += String.fromCharCode(224 | e3 >> 12 & 15), r3 += String.fromCharCode(128 | e3 >> 6 & 63), r3 += String.fromCharCode(128 | e3 >> 0 & 63)) : (r3 += String.fromCharCode(192 | e3 >> 6 & 31), r3 += String.fromCharCode(128 | e3 >> 0 & 63));
+        return r3;
+      }(n3));
+      var g2 = new e2(t3, i2);
+      g2.addData(n3), g2.make(), this.base = g2, this.typeNumber = g2.typeNumber, this.modules = g2.modules, this.moduleCount = g2.moduleCount, this.dynamicSize = s3 ? Math.ceil((d2 - 2 * u2) / g2.moduleCount) * g2.moduleCount + 2 * u2 : d2, function(o4) {
+        let { dynamicSize: e3, margin: r3, backgroundColor: t4, backgroundPadding: i3, foregroundColor: n4, foregroundPadding: a3, modules: d3, moduleCount: u3 } = o4;
+        var s4 = (e3 - 2 * r3) / u3, g3 = s4, l2 = 0;
+        i3 > 0 && (g3 -= 2 * (l2 = g3 * i3 / 2));
+        var h2 = s4, c2 = 0;
+        a3 > 0 && (h2 -= 2 * (c2 = h2 * a3 / 2));
+        for (var m2 = 0; m2 < u3; m2++)
+          for (var f3 = 0; f3 < u3; f3++) {
+            var v2 = f3 * s4 + r3, p3 = m2 * s4 + r3;
+            if (d3[m2][f3]) {
+              var C2 = c2, b2 = v2 + c2, y = p3 + c2, k = h2, w = h2;
+              d3[m2][f3] = { type: ["foreground"], color: n4, isBlack: true, isDrawn: false, destX: v2, destY: p3, destWidth: s4, destHeight: s4, x: b2, y, width: k, height: w, paddingTop: C2, paddingRight: C2, paddingBottom: C2, paddingLeft: C2 };
+            } else
+              C2 = l2, b2 = v2 + l2, y = p3 + l2, k = g3, w = g3, d3[m2][f3] = { type: ["background"], color: t4, isBlack: false, isDrawn: false, destX: v2, destY: p3, destWidth: s4, destHeight: s4, x: b2, y, width: k, height: w, paddingTop: C2, paddingRight: C2, paddingBottom: C2, paddingLeft: C2 };
+          }
+      }(this), function(o4) {
+        let { modules: e3, moduleCount: r3, positionProbeBackgroundColor: t4, positionProbeForegroundColor: i3 } = o4;
+        var n4 = r3 - 7;
+        [[0, 0, 1], [1, 0, 1], [2, 0, 1], [3, 0, 1], [4, 0, 1], [5, 0, 1], [6, 0, 1], [0, 1, 1], [1, 1, 0], [2, 1, 0], [3, 1, 0], [4, 1, 0], [5, 1, 0], [6, 1, 1], [0, 2, 1], [1, 2, 0], [2, 2, 1], [3, 2, 1], [4, 2, 1], [5, 2, 0], [6, 2, 1], [0, 3, 1], [1, 3, 0], [2, 3, 1], [3, 3, 1], [4, 3, 1], [5, 3, 0], [6, 3, 1], [0, 4, 1], [1, 4, 0], [2, 4, 1], [3, 4, 1], [4, 4, 1], [5, 4, 0], [6, 4, 1], [0, 5, 1], [1, 5, 0], [2, 5, 0], [3, 5, 0], [4, 5, 0], [5, 5, 0], [6, 5, 1], [0, 6, 1], [1, 6, 1], [2, 6, 1], [3, 6, 1], [4, 6, 1], [5, 6, 1], [6, 6, 1]].forEach((o5) => {
+          var r4 = e3[o5[0]][o5[1]], a3 = e3[o5[0] + n4][o5[1]], d3 = e3[o5[0]][o5[1] + n4];
+          d3.type.push("positionProbe"), a3.type.push("positionProbe"), r4.type.push("positionProbe"), r4.color = 1 == o5[2] ? i3 : t4, a3.color = 1 == o5[2] ? i3 : t4, d3.color = 1 == o5[2] ? i3 : t4;
+        });
+      }(this), function(o4) {
+        let { modules: e3, moduleCount: r3, separatorColor: t4 } = o4;
+        [[7, 0], [7, 1], [7, 2], [7, 3], [7, 4], [7, 5], [7, 6], [7, 7], [0, 7], [1, 7], [2, 7], [3, 7], [4, 7], [5, 7], [6, 7]].forEach((o5) => {
+          var i3 = e3[o5[0]][o5[1]], n4 = e3[r3 - o5[0] - 1][o5[1]], a3 = e3[o5[0]][r3 - o5[1] - 1];
+          a3.type.push("separator"), n4.type.push("separator"), i3.type.push("separator"), i3.color = t4, n4.color = t4, a3.color = t4;
+        });
+      }(this), function(o4) {
+        let { typeNumber: e3, modules: r3, moduleCount: t4, foregroundColor: i3, backgroundColor: n4, positionAdjustForegroundColor: a3, positionAdjustBackgroundColor: d3, timingForegroundColor: u3, timingBackgroundColor: s4 } = o4;
+        var g3 = [[], [6, 18], [6, 22], [6, 26], [6, 30], [6, 34], [6, 22, 38], [6, 24, 42], [6, 26, 46], [6, 28, 50], [6, 30, 54], [6, 32, 58], [6, 34, 62], [6, 26, 46, 66], [6, 26, 48, 70], [6, 26, 50, 74], [6, 30, 54, 78], [6, 30, 56, 82], [6, 30, 58, 86], [6, 34, 62, 90], [6, 28, 50, 72, 94], [6, 26, 50, 74, 98], [6, 30, 54, 78, 102], [6, 28, 54, 80, 106], [6, 32, 58, 84, 110], [6, 30, 58, 86, 114], [6, 34, 62, 90, 118], [6, 26, 50, 74, 98, 122], [6, 30, 54, 78, 102, 126], [6, 26, 52, 78, 104, 130], [6, 30, 56, 82, 108, 134], [6, 34, 60, 86, 112, 138], [6, 30, 58, 86, 114, 142], [6, 34, 62, 90, 118, 146], [6, 30, 54, 78, 102, 126, 150], [6, 24, 50, 76, 102, 128, 154], [6, 28, 54, 80, 106, 132, 158], [6, 32, 58, 84, 110, 136, 162], [6, 26, 54, 82, 110, 138, 166], [6, 30, 58, 86, 114, 142, 170]][e3 - 1];
+        if (g3)
+          for (var l2 = [[-2, -2, 1], [-1, -2, 1], [0, -2, 1], [1, -2, 1], [2, -2, 1], [-2, -1, 1], [-1, -1, 0], [0, -1, 0], [1, -1, 0], [2, -1, 1], [-2, 0, 1], [-1, 0, 0], [0, 0, 1], [1, 0, 0], [2, 0, 1], [-2, 1, 1], [-1, 1, 0], [0, 1, 0], [1, 1, 0], [2, 1, 1], [-2, 2, 1], [-1, 2, 1], [0, 2, 1], [1, 2, 1], [2, 2, 1]], h2 = g3.length, c2 = 0; c2 < h2; c2++)
+            for (var m2 = 0; m2 < h2; m2++) {
+              var { x: f3, y: v2 } = { x: g3[c2], y: g3[m2] };
+              f3 < 9 && v2 < 9 || f3 > t4 - 9 - 1 && v2 < 9 || v2 > t4 - 9 - 1 && f3 < 9 || l2.forEach((o5) => {
+                var e4 = r3[f3 + o5[0]][v2 + o5[1]];
+                e4.type.push("positionAdjust"), e4.type.includes("timing") ? 1 == o5[2] ? e4.color = a3 == i3 ? u3 : a3 : e4.color = a3 == i3 && d3 == n4 ? s4 : d3 : e4.color = 1 == o5[2] ? a3 : d3;
+              });
+            }
+      }(this), function(o4) {
+        let { modules: e3, moduleCount: r3, timingForegroundColor: t4, timingBackgroundColor: i3 } = o4;
+        for (var n4 = r3 - 16, a3 = 0; a3 < n4; a3++) {
+          var d3 = e3[6][8 + a3], u3 = e3[8 + a3][6];
+          d3.type.push("timing"), u3.type.push("timing"), d3.color = 1 & a3 ^ 1 ? t4 : i3, u3.color = 1 & a3 ^ 1 ? t4 : i3;
+        }
+      }(this), function(o4) {
+        let { modules: e3, moduleCount: r3, darkBlockColor: t4 } = o4;
+        var i3 = e3[r3 - 7 - 1][8];
+        i3.type.push("darkBlock"), i3.color = t4;
+      }(this), function(o4) {
+        let { typeNumber: e3, modules: r3, moduleCount: t4, typeNumberBackgroundColor: i3, typeNumberForegroundColor: n4 } = o4;
+        if (e3 < 7)
+          return r3;
+        var a3 = [0, 0, 0, 0, 0, 0, 0, "000111110010010100", "001000010110111100", "001001101010011001", "001010010011010011", "001011101111110110", "001100011101100010", "001101100001000111", "001110011000001101", "001111100100101000", "010000101101111000", "010001010001011101", "010010101000010111", "010011010100110010", "010100100110100110", "010101011010000011", "010110100011001001", "010111011111101100", "011000111011000100", "011001000111100001", "011010111110101011", "011011000010001110", "011100110000011010", "011101001100111111", "011110110101110101", "011111001001010000", "100000100111010101", "100001011011110000", "100010100010111010", "100011011110011111", "100100101100001011", "100101010000101110", "100110101001100100", "100111010101000001", "101000110001101001"], d3 = a3[e3] + a3[e3], u3 = [t4 - 11, t4 - 10, t4 - 9];
+        [[5, u3[2]], [5, u3[1]], [5, u3[0]], [4, u3[2]], [4, u3[1]], [4, u3[0]], [3, u3[2]], [3, u3[1]], [3, u3[0]], [2, u3[2]], [2, u3[1]], [2, u3[0]], [1, u3[2]], [1, u3[1]], [1, u3[0]], [0, u3[2]], [0, u3[1]], [0, u3[0]], [u3[2], 5], [u3[1], 5], [u3[0], 5], [u3[2], 4], [u3[1], 4], [u3[0], 4], [u3[2], 3], [u3[1], 3], [u3[0], 3], [u3[2], 2], [u3[1], 2], [u3[0], 2], [u3[2], 1], [u3[1], 1], [u3[0], 1], [u3[2], 0], [u3[1], 0], [u3[0], 0]].forEach((o5, e4) => {
+          var t5 = r3[o5[0]][o5[1]];
+          t5.type.push("typeNumber"), t5.color = "1" == d3[e4] ? n4 : i3;
+        });
+      }(this), this.isMaked = true, this.drawModules = [];
+    }, b.prototype.getDrawModules = function() {
+      if (this.drawModules && this.drawModules.length > 0)
+        return this.drawModules;
+      let o3 = this.drawModules = [], { modules: e3, moduleCount: r2, dynamicSize: t3, areaColor: i2, backgroundImageSrc: n3, backgroundImageX: a2, backgroundImageY: d2, backgroundImageWidth: u2, backgroundImageHeight: s3, backgroundImageAlpha: g2, backgroundImageBorderRadius: l2, foregroundImageSrc: h2, foregroundImageX: c2, foregroundImageY: m2, foregroundImageWidth: f3, foregroundImageHeight: v2, foregroundImagePadding: p3, foregroundImageBackgroundColor: C2, foregroundImageBorderRadius: b2, foregroundImageShadowOffsetX: y, foregroundImageShadowOffsetY: k, foregroundImageShadowBlur: w, foregroundImageShadowColor: I } = this;
+      i2 && o3.push({ name: "area", type: "area", color: i2, x: 0, y: 0, width: t3, height: t3 }), n3 && o3.push({ name: "backgroundImage", type: "image", imageSrc: n3, mappingName: "backgroundImageSrc", x: a2, y: d2, width: u2, height: s3, alpha: g2, borderRadius: l2 });
+      for (var B = 0; B < r2; B++)
+        for (var S = 0; S < r2; S++) {
+          var P = e3[B][S];
+          P.isDrawn || (P.type.includes("foreground") ? o3.push({ name: "foreground", type: "tile", color: P.color, destX: P.destX, destY: P.destY, destWidth: P.destWidth, destHeight: P.destHeight, x: P.x, y: P.y, width: P.width, height: P.height, paddingTop: P.paddingTop, paddingRight: P.paddingRight, paddingBottom: P.paddingBottom, paddingLeft: P.paddingLeft, rowIndex: B, colIndex: S }) : o3.push({ name: "background", type: "tile", color: P.color, destX: P.destX, destY: P.destY, destWidth: P.destWidth, destHeight: P.destHeight, x: P.x, y: P.y, width: P.width, height: P.height, paddingTop: P.paddingTop, paddingRight: P.paddingRight, paddingBottom: P.paddingBottom, paddingLeft: P.paddingLeft, rowIndex: B, colIndex: S }), P.isDrawn = true);
+        }
+      return h2 && o3.push({ name: "foregroundImage", type: "image", imageSrc: h2, mappingName: "foregroundImageSrc", x: c2, y: m2, width: f3, height: v2, padding: p3, backgroundColor: C2, borderRadius: b2, shadowOffsetX: y, shadowOffsetY: k, shadowBlur: w, shadowColor: I }), o3;
+    }, b.prototype.isBlack = function(o3, e3) {
+      var r2 = this.moduleCount;
+      return !(0 > o3 || 0 > e3 || o3 >= r2 || e3 >= r2) && this.modules[o3][e3].isBlack;
+    }, b.prototype.drawCanvas = function(o3) {
+      let { isMaked: e3, canvasContext: r2, useDynamicSize: t3, dynamicSize: i2, foregroundColor: n3, foregroundPadding: a2, backgroundColor: d2, backgroundPadding: u2, drawReserve: s3, margin: g2 } = this;
+      if (!e3)
+        return console.error("[uQRCode]: please execute the make method first!"), Promise.reject(new b.Error("please execute the make method first!"));
+      let l2 = this.getDrawModules(), h2 = async (e4, t4) => {
+        try {
+          r2.draw(o3);
+          for (var i3 = 0; i3 < l2.length; i3++) {
+            var n4 = l2[i3];
+            switch (r2.save(), n4.type) {
+              case "area":
+                r2.setFillStyle(n4.color), r2.fillRect(n4.x, n4.y, n4.width, n4.height);
+                break;
+              case "tile":
+                var a3 = n4.x, d3 = n4.y, u3 = n4.width, g3 = n4.height;
+                r2.setFillStyle(n4.color), r2.fillRect(a3, d3, u3, g3);
+                break;
+              case "image":
+                if ("backgroundImage" === n4.name) {
+                  a3 = Math.round(n4.x), d3 = Math.round(n4.y), u3 = Math.round(n4.width), g3 = Math.round(n4.height);
+                  u3 < 2 * (c2 = Math.round(n4.borderRadius)) && (c2 = u3 / 2), g3 < 2 * c2 && (c2 = g3 / 2), r2.setGlobalAlpha(n4.alpha), c2 > 0 && (r2.beginPath(), r2.moveTo(a3 + c2, d3), r2.arcTo(a3 + u3, d3, a3 + u3, d3 + g3, c2), r2.arcTo(a3 + u3, d3 + g3, a3, d3 + g3, c2), r2.arcTo(a3, d3 + g3, a3, d3, c2), r2.arcTo(a3, d3, a3 + u3, d3, c2), r2.closePath(), r2.setStrokeStyle("rgba(0,0,0,0)"), r2.stroke(), r2.clip());
+                  try {
+                    var h3 = await this.loadImage(n4.imageSrc);
+                    r2.drawImage(h3, a3, d3, u3, g3);
+                  } catch (o4) {
+                    throw console.error(`[uQRCode]: ${n4.mappingName} invalid!`), new b.Error(`${n4.mappingName} invalid!`);
+                  }
+                } else if ("foregroundImage" === n4.name) {
+                  a3 = Math.round(n4.x), d3 = Math.round(n4.y), u3 = Math.round(n4.width), g3 = Math.round(n4.height);
+                  var c2, m2 = Math.round(n4.padding);
+                  u3 < 2 * (c2 = Math.round(n4.borderRadius)) && (c2 = u3 / 2), g3 < 2 * c2 && (c2 = g3 / 2);
+                  var f3 = a3 - m2, v2 = d3 - m2, p3 = u3 + 2 * m2, C2 = g3 + 2 * m2, y = Math.round(p3 / u3 * c2);
+                  p3 < 2 * y && (y = p3 / 2), C2 < 2 * y && (y = C2 / 2), r2.save(), r2.setShadow(n4.shadowOffsetX, n4.shadowOffsetY, n4.shadowBlur, n4.shadowColor), y > 0 ? (r2.beginPath(), r2.moveTo(f3 + y, v2), r2.arcTo(f3 + p3, v2, f3 + p3, v2 + C2, y), r2.arcTo(f3 + p3, v2 + C2, f3, v2 + C2, y), r2.arcTo(f3, v2 + C2, f3, v2, y), r2.arcTo(f3, v2, f3 + p3, v2, y), r2.closePath(), r2.setFillStyle(n4.backgroundColor), r2.fill()) : (r2.setFillStyle(n4.backgroundColor), r2.fillRect(f3, v2, p3, C2)), r2.restore(), r2.save(), y > 0 ? (r2.beginPath(), r2.moveTo(f3 + y, v2), r2.arcTo(f3 + p3, v2, f3 + p3, v2 + C2, y), r2.arcTo(f3 + p3, v2 + C2, f3, v2 + C2, y), r2.arcTo(f3, v2 + C2, f3, v2, y), r2.arcTo(f3, v2, f3 + p3, v2, y), r2.closePath(), r2.setFillStyle(m2 > 0 ? n4.backgroundColor : "rgba(0,0,0,0)"), r2.fill()) : (r2.setFillStyle(m2 > 0 ? n4.backgroundColor : "rgba(0,0,0,0)"), r2.fillRect(f3, v2, p3, C2)), r2.restore(), c2 > 0 && (r2.beginPath(), r2.moveTo(a3 + c2, d3), r2.arcTo(a3 + u3, d3, a3 + u3, d3 + g3, c2), r2.arcTo(a3 + u3, d3 + g3, a3, d3 + g3, c2), r2.arcTo(a3, d3 + g3, a3, d3, c2), r2.arcTo(a3, d3, a3 + u3, d3, c2), r2.closePath(), r2.setStrokeStyle("rgba(0,0,0,0)"), r2.stroke(), r2.clip());
+                  try {
+                    h3 = await this.loadImage(n4.imageSrc);
+                    r2.drawImage(h3, a3, d3, u3, g3);
+                  } catch (o4) {
+                    throw console.error(`[uQRCode]: ${n4.mappingName} invalid!`), new b.Error(`${n4.mappingName} invalid!`);
+                  }
+                }
+            }
+            s3 && r2.draw(true), r2.restore();
+          }
+          r2.draw(true), setTimeout(e4, 150);
+        } catch (o4) {
+          t4(o4);
+        }
+      };
+      return new Promise((o4, e4) => {
+        h2(o4, e4);
+      });
+    }, b.prototype.draw = function(o3) {
+      return this.drawCanvas(o3);
+    }, b.prototype.register = function(o3) {
+      o3 && o3(b, this, true);
+    }, b;
+  });
+})(uqrcode);
+var uqrcodeExports = uqrcode.exports;
+const UQRCode = /* @__PURE__ */ getDefaultExportFromCjs(uqrcodeExports);
+exports.UQRCode = UQRCode;
 exports._export_sfc = _export_sfc;
+exports.computed = computed;
 exports.createSSRApp = createSSRApp;
 exports.e = e;
 exports.f = f;
@@ -6883,11 +7555,13 @@ exports.o = o;
 exports.onBeforeMount = onBeforeMount;
 exports.onLoad = onLoad;
 exports.onMounted = onMounted;
+exports.onShow = onShow;
 exports.p = p;
 exports.reactive = reactive;
 exports.ref = ref;
 exports.resolveComponent = resolveComponent;
 exports.s = s;
+exports.sr = sr;
 exports.t = t;
 exports.toRaw = toRaw;
 exports.watch = watch;
