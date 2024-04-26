@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "填写服务订单",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "dt-picker": "../../components/dtPicker/dtPicker",
+    "uni-popup": "../../uni_modules/uni-popup/components/uni-popup/uni-popup"
+  }
+}

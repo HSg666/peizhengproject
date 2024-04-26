@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "搜索页",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "nav-bar": "../../components/NavBar/NavBar"
+  }
+}

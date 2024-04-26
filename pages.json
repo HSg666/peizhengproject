@@ -32,9 +32,8 @@
 		{
 			"path": "pages/hospital/index",
 			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false,
-				"navigationStyle": "custom" // 使用自定义导航栏
+				"navigationBarTitleText": "医院详情",
+				"enablePullDownRefresh": false
 			}
 		},
 		{

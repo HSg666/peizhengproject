@@ -73,7 +73,7 @@ const _sfc_main = {
             g: index
           });
         }),
-        l: common_vendor.s("position:absolute;top:120rpx;padding-top:65rpx;overflow:hidden;width:100%;"),
+        l: common_vendor.s("position:absolute;top:0rpx;padding-top:65rpx;overflow:hidden;width:100%;"),
         m: common_vendor.p({
           shareModal: clone_shareModal.value
         })

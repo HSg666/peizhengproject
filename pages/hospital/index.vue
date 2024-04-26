@@ -5,7 +5,7 @@
 			<image :src="hospital.avatar_url" mode="aspectFill"
 				style="filter: blur(50rpx) brightness(0.8); display: block; width: 100%; height: 550rpx; overflow: hidden">
 			</image>
-			<view :style="'position:absolute;top:' + 120 + 'rpx;padding-top:65rpx;overflow:hidden;width:100%;'">
+			<view :style="'position:absolute;top:' + 0 + 'rpx;padding-top:65rpx;overflow:hidden;width:100%;'">
 				<view class="hospital-hd">
 					<view class="weui-cell weui-cell_access" hover-class="weui-cell_active" @tap="showShareModal">
 						<view class="weui-cell__hd">

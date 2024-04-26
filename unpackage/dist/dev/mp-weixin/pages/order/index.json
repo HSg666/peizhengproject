@@ -3,6 +3,7 @@
   "navigationBarBackgroundColor": "#ffffff",
   "usingComponents": {
     "formater": "../../components/formater/formater",
-    "counter": "../../components/counter/counter"
+    "counter": "../../components/counter/counter",
+    "uni-popup": "../../uni_modules/uni-popup/components/uni-popup/uni-popup"
   }
 }

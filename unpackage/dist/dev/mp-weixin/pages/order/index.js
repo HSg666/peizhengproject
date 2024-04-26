@@ -3,12 +3,14 @@ const common_vendor = require("../../common/vendor.js");
 if (!Array) {
   const _easycom_formater2 = common_vendor.resolveComponent("formater");
   const _easycom_counter2 = common_vendor.resolveComponent("counter");
-  (_easycom_formater2 + _easycom_counter2)();
+  const _easycom_uni_popup2 = common_vendor.resolveComponent("uni-popup");
+  (_easycom_formater2 + _easycom_counter2 + _easycom_uni_popup2)();
 }
 const _easycom_formater = () => "../../components/formater/formater.js";
 const _easycom_counter = () => "../../components/counter/counter.js";
+const _easycom_uni_popup = () => "../../uni_modules/uni-popup/components/uni-popup/uni-popup.js";
 if (!Math) {
-  (_easycom_formater + _easycom_counter)();
+  (_easycom_formater + _easycom_counter + _easycom_uni_popup)();
 }
 const _sfc_main = {
   __name: "index",
@@ -16,7 +18,20 @@ const _sfc_main = {
     const app = getApp();
     const filt = common_vendor.ref("");
     const list = common_vendor.ref([]);
-    common_vendor.onShow(() => {
+    const popup = common_vendor.ref(null);
+    const validMobile = common_vendor.ref({
+      // 
+      validCode: "",
+      // 验证码
+      phone: ""
+      // 手机号
+    });
+    const countdown = common_vendor.ref({
+      validText: "获取验证码",
+      time: 60
+      // 倒计时
+    });
+    common_vendor.onMounted(() => {
       console.log(app.globalData.filt, " app.globalData.filt");
       filt.value = app.globalData.filt;
       getOrderList();
@@ -28,6 +43,9 @@ const _sfc_main = {
       getOrderList();
     };
     const getOrderList = () => {
+      if (!common_vendor.index.getStorageSync("token")) {
+        return popup.value.open("center");
+      }
       app.globalData.utils.request({
         url: "/order/list",
         method: "GET",
@@ -47,11 +65,93 @@ const _sfc_main = {
       });
     };
     const onCounterOver = () => {
+      filt.value = "";
       getOrderList();
     };
     const toOrder = (id) => {
       common_vendor.index.navigateTo({
         url: `./orderDetail/index?oid=${id}`
+      });
+    };
+    let flag = false;
+    const countdownChange = () => {
+      if (!validMobile.value.phone) {
+        return common_vendor.index.showToast({
+          title: "请输入手机号",
+          duration: 1e3,
+          icon: "none"
+        });
+      }
+      if (flag)
+        return;
+      flag = true;
+      const timer = setInterval(() => {
+        if (countdown.value.time <= 0) {
+          countdown.value.validText = "获取验证码";
+          countdown.value.time = 60;
+          clearInterval(timer);
+          flag = false;
+        } else {
+          countdown.value.time -= 1;
+          countdown.value.validText = `剩余${countdown.value.time}S`;
+        }
+      }, 1e3);
+      app.globalData.utils.request({
+        url: "/get/code",
+        method: "POST",
+        data: {
+          tel: validMobile.value.phone
+          // 手机号
+        },
+        success: (res) => {
+          common_vendor.index.showToast({
+            title: "验证码发送成功,请尽快验证!",
+            duration: 1e3,
+            icon: "none"
+          });
+        },
+        fail: (res) => {
+          common_vendor.index.showToast({
+            title: res.msg,
+            duration: 1e3,
+            icon: "none"
+          });
+        }
+      });
+    };
+    const cancal = () => {
+      popup.value.close();
+    };
+    const ok = () => {
+      if (!validMobile.value.phone || !validMobile.value.validCode) {
+        return common_vendor.index.showToast({
+          title: "请检查输入信息",
+          duration: 1e3,
+          icon: "none"
+        });
+      }
+      app.globalData.utils.request({
+        url: "/user/authentication",
+        method: "POST",
+        data: {
+          tel: validMobile.value.phone,
+          // 手机号
+          code: validMobile.value.validCode
+          // 验证码
+        },
+        success: (res) => {
+          common_vendor.index.setStorageSync("token", res.data.data.token);
+          popup.value.close();
+          getOrderList();
+        },
+        fail: (res) => {
+          popup.value.close();
+          common_vendor.index.showToast({
+            title: res.msg,
+            duration: 1e3,
+            icon: "none"
+          });
+        }
       });
     };
     return (_ctx, _cache) => {
@@ -122,7 +222,24 @@ const _sfc_main = {
             A: index
           });
         })
-      }) : {});
+      }) : {}, {
+        n: validMobile.value.phone,
+        o: common_vendor.o(($event) => validMobile.value.phone = $event.detail.value),
+        p: validMobile.value.validCode,
+        q: common_vendor.o(($event) => validMobile.value.validCode = $event.detail.value),
+        r: common_vendor.t(countdown.value.validText),
+        s: common_vendor.o(countdownChange),
+        t: common_vendor.o(cancal),
+        v: common_vendor.o(ok),
+        w: common_vendor.sr(popup, "e7e446b8-4", {
+          "k": "popup"
+        }),
+        x: common_vendor.p({
+          type: "center",
+          ["is-mask-click"]: false,
+          ["background-color"]: "#fff"
+        })
+      });
     };
   }
 };

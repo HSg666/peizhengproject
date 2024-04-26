@@ -29,3 +29,60 @@ page {
 .od-item .weui-cell__ft text {
 	font-size: 24rpx;
 }
+
+/* 登录弹框样式 */
+.popup-content {
+	width: 600rpx;
+	height: 260rpx;
+	padding: 20rpx;
+}
+.popup-content .group {
+	margin: 20rpx;
+	display: flex;
+}
+.popup-content .group input {
+	padding-left: 10rpx;
+	width: 100%;
+	border-bottom: 2rpx solid #f5f5f5;
+}
+.popup-content .group .valid-text {
+	width: 230rpx;
+	text-align: center;
+	line-height: 72rpx;
+	font-size: 28rpx;
+	color: #409eff;
+}
+.btns {
+	display: flex;
+	border-top: 2rpx solid #f5f5f5;
+}
+.btns view {
+	flex: 1;
+	text-align: center;
+	height: 80rpx;
+	line-height: 80rpx;
+}
+.btns .cancal {
+	border-right: 2rpx solid #f5f5f5;
+}
+.btns .ok {
+	color: #ee0a24;
+}
+.uni-popup__wrapper {
+	border-radius: 20rpx;
+}
+.text-center {
+	text-align: center;
+	margin-top: 20rpx;
+	margin-bottom: 20rpx;
+}
+.pay-box {
+	padding: 40rpx;
+}
+.pay-box canvas {
+	margin: 0 auto;
+}
+input {
+	height: 70rpx;
+	line-height: 70rpx;
+}

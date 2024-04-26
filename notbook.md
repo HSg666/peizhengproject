@@ -185,9 +185,11 @@ https://uniapp.dcloud.net.cn/component/uniui/uni-popup.html
 
   4、函数外初始flag为false，获取时如果flag为true，就不执行定时器，否则就将flag打开，并开启定时器。同时定时时间结束也要关闭flag。
 
-- 调用发送验证码接口，发送前校验手机号，校验通过将手机号传入接口，手机查看验证码
+4、调用发送验证码接口，发送前校验手机号，校验通过将手机号传入接口，手机查看验证码
 
-- 调用验证验证码接口，校验手机号和验证码不能为空，通过就传入接口，获取后端返回的token，并设置到缓存Storage中。接下来正式创建订单。
+5、调用验证验证码接口，校验手机号和验证码不能为空，通过就传入接口，获取后端返回的token，并设置到缓存Storage中。同时隐藏登录弹框。   接下来正式创建订单。
+
+额外：进入tabbar订单 
 
 ```html
 <uni-popup ref="popup" type="center" :is-mask-click="false" background-color="#fff">
@@ -514,3 +516,73 @@ referer: 取全局项目名称
 ```
 
 注意：微信id需要在"微信开发者中心"配置第三方"腾讯位置服务"授权，否则无法使用。
+
+
+
+### 十三、uniapp打包流程
+
+##### 1、检查AppId
+
+作用：检查HBuider X配置的AppId是否跟要上线的微信小程序AppId是否对应，这是打包微信小程序的。
+
+两个方案二选一即可。
+
+方案一：
+
+配置路径：manafest.json => 微信小程序配置 => 微信小程序AppId
+
+忘了AppId就登录到微信公众号平台去查看，开发 => 开发管理 => 开发者ID
+
+ https://mp.weixin.qq.com/cgi-bin/loginpage?url=%2Fwxamp%2Fdevprofile%2Fget_profile%3Ftoken%3D2101804115%26lang%3Dzh_CN
+
+方案二、
+
+配置路径：manafest.json =>源码视图 => 微信小程序AppId
+
+```js
+/* 小程序特有相关 */
+	"mp-weixin": {
+		"appid": "wx16ed4e0dc3c11b15", // 直接在此修改
+	}
+```
+
+##### 2、检查接口安全性
+
+`报错信息：处理 http://XXX 不在以下 request 合法域名列表中`
+
+- 开发环境：uniapp想使用本地服务器，就在 微信开发者工具 => 详情 => 本地设置 => 将“不校验合法域名、web-view(业务域名)、TLS版本以及HTTPS 证书”，勾选✔上。
+
+- 生产环境：
+
+到封装的功能请求函数中把请求地址更换，即：common/js/utils  
+
+```js
+本地           this.baseUrl = 'http://159.75.169.224:7300/pz'
+替换为生产环境的  this.baseUrl = 'https://code.itndedu.com/pz'
+```
+
+- 把线上的https合法域名在微信小程序平台配置一下
+
+https://mp.weixin.qq.com/wxamp/wadevelopcode/sandbox?lang=zh_CN&token=1221471645
+
+①、个人的：服务器域名 => 修改或开始配置 => request合法域名的文本框填上你的完整域名地址 => 保存并提交
+
+例如： https://code.itndedu.com
+
+企业的配置也差不多。
+
+②、配置完在微信开发者工具检查 => 详情 => 项目配置 => 域名信息 => request域名就是我们刚刚配置的域名。
+
+如果没看到更新的点一下刷新按钮。
+
+##### 3、发布
+
+HBuilder X：工具栏-发行 => 小程序-微信(仅适用于uni-app) => 检查项目名称和AppId => 发行（此时会自动打开 微信开发者工具）
+
+微信开发者工具： 信任作者并运行 => 本地设置 => 取消勾选“不校验合法域名、web-view(业务域名)、TLS版本以及HTTPS 证书” => 上传 => 填写版本号 => 确定
+
+小程序官网：https://mp.weixin.qq.com/wxamp/wadevelopcode/sandbox?lang=zh_CN&token=1221471645
+
+管理 => 版本管理 => 开发版本 => 点击体验就可以用手机查看了，或者在微信开发者工具用"真机调试"
+
+打包视频教程：https://www.bilibili.com/video/BV1jc411z7qG?p=37&vd_source=ac6f954f925d420ce11cce0f0cdd6566

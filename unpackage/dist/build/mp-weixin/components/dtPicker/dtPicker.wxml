@@ -1,0 +1,1 @@
+<view><picker mode="multiSelector" bindchange="{{c}}" bindcolumnchange="{{d}}" value="{{e}}" range="{{f}}"><input disabled="{{true}}" placeholder-style="color:#bbbbbb" placeholder="{{a}}" value="{{b}}"/></picker></view>

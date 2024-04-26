@@ -1,0 +1,49 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/order/index",
+    "pages/user/index",
+    "pages/search/index",
+    "pages/hospital/index",
+    "pages/service/index",
+    "pages/clients/index",
+    "pages/order/orderDetail/index"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#535353",
+    "selectedColor": "#0bb584",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/resource/images/tab_index.png",
+        "selectedIconPath": "static/resource/images/tab_index_seled.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/order/index",
+        "iconPath": "static/resource/images/tab_pub.png",
+        "selectedIconPath": "static/resource/images/tab_pub_seled.png",
+        "text": "订单"
+      },
+      {
+        "pagePath": "pages/user/index",
+        "iconPath": "static/resource/images/tab_user.png",
+        "selectedIconPath": "static/resource/images/tab_user_seled.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "requiredPrivateInfos": [
+    "getLocation",
+    "chooseAddress"
+  ],
+  "permission": {},
+  "usingComponents": {}
+}
