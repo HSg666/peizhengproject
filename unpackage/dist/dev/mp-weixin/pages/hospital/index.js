@@ -36,11 +36,12 @@ const _sfc_main = {
       });
     };
     const toService = (id) => {
+      common_vendor.index.navigateTo({
+        url: "../service/index?hid=" + hospital.value.id + "&svid=" + id
+      });
     };
     const showShareModal = () => {
       clone_shareModal.value = !clone_shareModal.value;
-    };
-    const toMap = () => {
     };
     return (_ctx, _cache) => {
       return {
@@ -59,8 +60,7 @@ const _sfc_main = {
         h: common_vendor.t(hospital.value.city),
         i: common_vendor.t(hospital.value.district),
         j: common_vendor.t(hospital.value.address),
-        k: common_vendor.o(toMap),
-        l: common_vendor.f(services.value, (item, index, i0) => {
+        k: common_vendor.f(services.value, (item, index, i0) => {
           return common_vendor.e({
             a: item.use_switch == 1
           }, item.use_switch == 1 ? {
@@ -73,8 +73,8 @@ const _sfc_main = {
             g: index
           });
         }),
-        m: common_vendor.s("position:absolute;top:120rpx;padding-top:65rpx;overflow:hidden;width:100%;"),
-        n: common_vendor.p({
+        l: common_vendor.s("position:absolute;top:120rpx;padding-top:65rpx;overflow:hidden;width:100%;"),
+        m: common_vendor.p({
           shareModal: clone_shareModal.value
         })
       };

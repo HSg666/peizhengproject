@@ -25,7 +25,7 @@
 						</view>
 						<view class="weui-cell__ft weui-cell__ft_in-access"><text class="f4">转发</text></view>
 					</view>
-					<view class="weui-cell weui-cell_access" hover-class="weui-cell_active" @tap="toMap">
+					<view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
 						<view class="weui-cell__hd">
 							<image src="/static/resource/images/ic_address.png" mode="aspectFill"
 								style="margin-right: 10rpx; display: block; width: 40rpx; height: 40rpx"></image>
@@ -120,20 +120,17 @@
 		})
 	}
 
-	// 去服务
+	// 去预约
 	const toService = (id) => {
-
+		uni.navigateTo({
+			url: '../service/index?hid=' + hospital.value.id + '&svid=' + id
+		})
 	}
 
 
 	// 显示转发弹框
 	const showShareModal = () => {
 		clone_shareModal.value = !clone_shareModal.value
-	}
-	// 地图导航功能
-
-	const toMap = () => {
-
 	}
 </script>
 
