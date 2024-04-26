@@ -17,6 +17,8 @@ const _sfc_main = {
     const filt = common_vendor.ref("");
     const list = common_vendor.ref([]);
     common_vendor.onShow(() => {
+      console.log(app.globalData.filt, " app.globalData.filt");
+      filt.value = app.globalData.filt;
       getOrderList();
     });
     const onFilterChange = (status) => {

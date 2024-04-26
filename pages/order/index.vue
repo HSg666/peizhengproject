@@ -115,6 +115,9 @@
 	const list = ref([]) // 订单列表
 
 	onShow(() => {
+		console.log(app.globalData.filt, ' app.globalData.filt');
+		// 获取从个人中心保存到全局的订单状态值
+		filt.value = app.globalData.filt
 		getOrderList()
 	})
 	// 切换tab栏
