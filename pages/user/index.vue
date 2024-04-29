@@ -80,27 +80,59 @@
 			</view>
 		</view>
 		<share :shareModal="clone_shareModal"></share>
+
+		<!-- 手机登录弹窗 -->
+		<uni-popup ref="popup" type="center" :is-mask-click="false" background-color="#fff">
+			<view class="popup-content">
+				<view class="group">
+					<input class="uni-input" type="tel" v-model="validMobile.phone" placeholder="手机号" />
+				</view>
+				<view class="group">
+					<input class="uni-input" v-model="validMobile.validCode" placeholder="请输入验证码" />
+					<text class="valid-text" @click="countdownChange">{{countdown.validText}}</text>
+				</view>
+			</view>
+			<view class="btns">
+				<view class="cancal" @click="cancal">取消</view>
+				<view class="ok" @click="ok">确定</view>
+			</view>
+		</uni-popup>
 	</view>
 </template>
 
 <script setup>
 	import {
-		ref
+		ref,
+		onMounted
 	} from 'vue'
-	import {
-		onShow
-	} from "@dcloudio/uni-app"
 
 	const app = getApp()
 	const mine = ref({}) // 用户信息
 	const statistic = ref({}) // 订单数量
+	const popup = ref(null) // 登录弹框
+	const validMobile = ref({ // 
+		validCode: '', // 验证码
+		phone: '' // 手机号
+	})
+	// 验证码
+	const countdown = ref({
+		validText: '获取验证码',
+		time: 60, // 倒计时
+	})
 
-	onShow(() => {
+	onMounted(() => {
+
 		getUserInfo()
 	})
 
 	// 获取个人信息
 	const getUserInfo = () => {
+		// 如果用户没登录就弹框手机验证码登录
+		if (!uni.getStorageSync('token')) {
+			return popup.value.open('center')
+		}
+
+
 		app.globalData.utils.request({
 			url: '/User/index',
 			method: 'GET',
@@ -137,6 +169,105 @@
 	const toServiceManager = () => {
 		uni.navigateTo({
 			url: '../clients/index'
+		})
+	}
+
+
+
+	// 登录
+	let flag = false // 做防抖
+	const countdownChange = () => {
+
+		// 校验 手机号
+		if (!validMobile.value.phone) {
+			return uni.showToast({
+				title: '请输入手机号',
+				duration: 1000,
+				icon: 'none'
+			})
+		}
+
+		// 1.如果flag还开着,带着有定时器,那么直接return出去
+		if (flag) return
+		// 2.进来就打开
+		flag = true
+		// 3.开启定时器
+		const timer = setInterval(() => {
+			if (countdown.value.time <= 0) {
+				countdown.value.validText = '获取验证码'
+				countdown.value.time = 60
+				clearInterval(timer)
+				// 时间走完要关闭
+				flag = false
+			} else {
+				countdown.value.time -= 1
+				countdown.value.validText = `剩余${countdown.value.time}S`
+			}
+		}, 1000)
+
+		// 获取验证码
+		app.globalData.utils.request({
+			url: '/get/code',
+			method: 'POST',
+			data: {
+				tel: validMobile.value.phone // 手机号
+			},
+			success: res => {
+
+				uni.showToast({
+					title: '验证码发送成功,请尽快验证!',
+					duration: 1000,
+					icon: 'none'
+				})
+			},
+			fail: res => {
+				uni.showToast({
+					title: res.msg,
+					duration: 1000,
+					icon: 'none'
+				})
+			}
+		})
+	}
+
+	// 取消弹窗
+	const cancal = () => {
+		popup.value.close() // 关闭弹窗
+	}
+
+	// 确认弹窗
+	const ok = () => {
+		// 如果手机号为空 或 验证码为空,则提示用户
+		if (!validMobile.value.phone || !validMobile.value.validCode) {
+			return uni.showToast({
+				title: '请检查输入信息',
+				duration: 1000,
+				icon: 'none'
+			})
+		}
+		// 验证码验证,正式登录  
+		app.globalData.utils.request({
+			url: '/user/authentication',
+			method: 'POST',
+			data: {
+				tel: validMobile.value.phone, // 手机号
+				code: validMobile.value.validCode // 验证码
+			},
+			success: (res) => {
+				// 登录成功将token设置到缓存中
+				uni.setStorageSync('token', res.data.data.token)
+				popup.value.close() // 关闭弹窗
+				// 接下来获取用户信息
+				getUserInfo()
+			},
+			fail: (res) => {
+				popup.value.close() // 关闭弹窗
+				uni.showToast({
+					title: res.msg,
+					duration: 1000,
+					icon: 'none'
+				})
+			}
 		})
 	}
 </script>

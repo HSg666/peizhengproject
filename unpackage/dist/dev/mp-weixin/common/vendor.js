@@ -1287,7 +1287,7 @@ function populateParameters(fromRes, toRes) {
   let _SDKVersion = SDKVersion;
   const hostLanguage = language.replace(/_/g, "-");
   const parameters = {
-    appId: "",
+    appId: "__UNI__728B70F",
     appName: "peizhengproject",
     appVersion: "1.0.0",
     appVersionCode: "100",
@@ -1431,7 +1431,7 @@ const getAppBaseInfo = {
       hostName: _hostName,
       hostSDKVersion: SDKVersion,
       hostTheme: theme,
-      appId: "",
+      appId: "__UNI__728B70F",
       appName: "peizhengproject",
       appVersion: "1.0.0",
       appVersionCode: "100",
@@ -6877,7 +6877,6 @@ const createSubpackageApp = initCreateSubpackageApp();
 const createHook = (lifecycle) => (hook, target = getCurrentInstance()) => {
   !isInSSRComponentSetup && injectHook(lifecycle, hook, target);
 };
-const onShow = /* @__PURE__ */ createHook(ON_SHOW);
 const onLoad = /* @__PURE__ */ createHook(ON_LOAD);
 var commonjsGlobal = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
 function getDefaultExportFromCjs(x) {
@@ -7555,7 +7554,6 @@ exports.o = o;
 exports.onBeforeMount = onBeforeMount;
 exports.onLoad = onLoad;
 exports.onMounted = onMounted;
-exports.onShow = onShow;
 exports.p = p;
 exports.reactive = reactive;
 exports.ref = ref;
