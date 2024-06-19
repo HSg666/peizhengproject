@@ -51,3 +51,24 @@ HBuilder X：项目目录找到 manifest.json 文件 => 左侧栏"源码视图" 
 5、如果上面这些文字教程中间卡壳或者一直有问题，推荐看源视频，前几个视频老师有教。
 
 ### 项目效果图
+##### 首页
+![image](https://github.com/HSg666/peizhengproject/blob/main/static/resource/reviewProject/%E9%A6%96%E9%A1%B5.jpg)
+
+##### 医院详情
+![image](https://github.com/HSg666/peizhengproject/blob/main/static/resource/reviewProject/%E5%8C%BB%E9%99%A2%E8%AF%A6%E6%83%85.jpg)
+
+##### 创建订单
+![image](https://github.com/HSg666/peizhengproject/blob/main/static/resource/reviewProject/%E5%88%9B%E5%BB%BA%E8%AE%A2%E5%8D%95.png)
+
+##### 微信扫码支付
+![image](https://github.com/HSg666/peizhengproject/blob/main/static/resource/reviewProject/%E6%89%AB%E7%A0%81%E6%94%AF%E4%BB%98.png)
+
+##### 个人中心
+![image](https://github.com/HSg666/peizhengproject/blob/main/static/resource/reviewProject/%E4%B8%AA%E4%BA%BA%E4%B8%AD%E5%BF%83.png)
+
+##### 真实手机号验证码登录
+![image](https://github.com/HSg666/peizhengproject/blob/main/static/resource/reviewProject/%E6%9C%8D%E5%8A%A1%E5%AF%B9%E8%B1%A1%E7%AE%A1%E7%90%86.png)
+
+##### 服务对象管理
+![image](https://github.com/HSg666/peizhengproject/blob/main/static/resource/reviewProject/%E6%9C%8D%E5%8A%A1%E5%AF%B9%E8%B1%A1%E7%AE%A1%E7%90%86.png)
+
