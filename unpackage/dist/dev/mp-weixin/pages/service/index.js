@@ -41,6 +41,7 @@ const _sfc_main = {
       receiveAddress: ""
       // 接送地址
     });
+    const userReceiveInfo = common_vendor.ref("");
     const personInfo = common_vendor.ref({
       name: "",
       age: "",
@@ -115,10 +116,12 @@ const _sfc_main = {
             detailInfo,
             userName
           } = res;
+          userReceiveInfo.value = res ? userName + "(" + cityName + countyName + detailInfo + ")" : "";
           order.address.userName = userName;
           order.address.cityName = cityName;
           order.address.countyName = countyName;
           order.address.detailInfo = detailInfo;
+          console.log(res, "res");
         },
         fail: (err) => {
           console.log(err, "err");
@@ -379,7 +382,7 @@ const _sfc_main = {
           timestamp: order.starttime,
           placeholder: "请选择期望服务时间"
         }),
-        B: order.address.userName ? order.address.userName + "(" + order.address.cityName + order.address.countyName + order.address.detailInfo + ")" : "",
+        B: userReceiveInfo.value,
         C: common_vendor.o(onAddressChange),
         D: order.tel,
         E: common_vendor.o(($event) => order.tel = $event.detail.value),

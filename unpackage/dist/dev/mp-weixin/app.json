@@ -41,7 +41,6 @@
     ]
   },
   "requiredPrivateInfos": [
-    "getLocation",
     "chooseAddress"
   ],
   "permission": {},

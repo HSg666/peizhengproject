@@ -166,11 +166,7 @@
 						<view class="weui-cell__bd"></view>
 						<view class="weui-cell__ft weui-cell__ft_in-access">
 							<input class="weui-input" :disabled="true" style="text-align: right"
-								placeholder-class="vp-placeholder" placeholder="请选择收件信息" :value="
-																			order.address.userName
-																				? order.address.userName + '(' + order.address.cityName + order.address.countyName + order.address.detailInfo + ')'
-																				: ''
-																		" />
+								placeholder-class="vp-placeholder" placeholder="请选择收件信息" :value="userReceiveInfo" />
 							<!-- {{order.address?(order.address.userName+'('+order.address.telNumber+')'):''}} -->
 						</view>
 					</view>
@@ -240,10 +236,13 @@
 					@click="closeQRCodePopup">
 				</image>
 				<view class="text-center">微信扫一扫</view>
+				<!-- 关键 -->
 				<canvas id="qrcode" canvas-id="qrcode" style="width: 400rpx;height: 400rpx;"></canvas>
 				<view class="text-center">请用本人微信扫描以上二维码</view>
 			</view>
 		</uni-popup>
+
+
 
 	</view>
 </template>
@@ -283,6 +282,8 @@
 		},
 		receiveAddress: '', // 接送地址
 	})
+	// 用户收货信息
+	const userReceiveInfo = ref('')
 	const personInfo = ref({
 		name: '',
 		age: '',
@@ -368,6 +369,8 @@
 			url: '/pages/clients/index?act=select'
 		})
 	}
+
+
 	// 选择收货地址
 	const onAddressChange = () => {
 		uni.chooseAddress({
@@ -378,11 +381,15 @@
 					detailInfo,
 					userName
 				} = res
+
+				userReceiveInfo.value = res ? userName + '(' + cityName + countyName + detailInfo + ')' :
+					''
 				order.address.userName = userName
 				order.address.cityName = cityName
 				order.address.countyName = countyName
 				order.address.detailInfo = detailInfo
-				// console.log(res, 'res');
+
+				console.log(res, 'res');
 			},
 			fail: (err) => {
 				console.log(err, 'err');
@@ -643,7 +650,7 @@
 		// 调用制作二维码方法
 		qr.make();
 		// 获取canvas上下文
-		var canvasContext = uni.createCanvasContext('qrcode'); // 如果是组件，this必须传入
+		var canvasContext = uni.createCanvasContext('qrcode');
 		// 设置uQRCode实例的canvas上下文
 		qr.canvasContext = canvasContext;
 		// 调用绘制方法将二维码图案绘制到canvas上

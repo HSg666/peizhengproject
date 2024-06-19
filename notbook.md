@@ -112,14 +112,14 @@ order.value.price 改为  order.price ,即可解决。
 发送事件
 
 ```js
-发送事件名、数据
+// 发送事件名、数据
 uni.$emit('clientData', item)
 ```
 
 接收事件
 
 ```js
-接收事件名、获取数据
+// 接收事件名、获取数据
 uni.$on('clientData', (data) => {
 		personName.value = data.name
 	})
@@ -159,7 +159,7 @@ uni.chooseAddress({
 
 ### 六、如何引入扩展组件并使用
 
-1、打开此链接，找到点击下载&安装；下载插件并导入HBuild X
+1、打开此链接，找到点击下载&安装；下载插件并导入HBuilder X
 
 https://uniapp.dcloud.net.cn/component/uniui/uni-popup.html
 
@@ -189,7 +189,7 @@ https://uniapp.dcloud.net.cn/component/uniui/uni-popup.html
 
 5、调用验证验证码接口，校验手机号和验证码不能为空，通过就传入接口，获取后端返回的token，并设置到缓存Storage中。同时隐藏登录弹框。   接下来正式创建订单。
 
-额外：进入tabbar订单 
+额外：进入tabbar订单
 
 ```html
 <uni-popup ref="popup" type="center" :is-mask-click="false" background-color="#fff">
