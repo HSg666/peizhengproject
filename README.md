@@ -67,7 +67,7 @@ HBuilder X：项目目录找到 manifest.json 文件 => 左侧栏"源码视图" 
 ![image](https://github.com/HSg666/peizhengproject/blob/main/static/resource/reviewProject/%E4%B8%AA%E4%BA%BA%E4%B8%AD%E5%BF%83.png)
 
 ##### 真实手机号验证码登录
-![image](https://github.com/HSg666/peizhengproject/blob/main/static/resource/reviewProject/%E6%9C%8D%E5%8A%A1%E5%AF%B9%E8%B1%A1%E7%AE%A1%E7%90%86.png)
+![image](https://github.com/HSg666/peizhengproject/blob/main/static/resource/reviewProject/%E7%99%BB%E5%BD%95.png)
 
 ##### 服务对象管理
 ![image](https://github.com/HSg666/peizhengproject/blob/main/static/resource/reviewProject/%E6%9C%8D%E5%8A%A1%E5%AF%B9%E8%B1%A1%E7%AE%A1%E7%90%86.png)
