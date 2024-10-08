@@ -1,5 +1,6 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
+const common_assets = require("../../common/assets.js");
 if (!Array) {
   const _easycom_dtPicker2 = common_vendor.resolveComponent("dtPicker");
   const _easycom_uni_popup2 = common_vendor.resolveComponent("uni-popup");
@@ -308,8 +309,7 @@ const _sfc_main = {
         },
         data: params,
         success: (res) => {
-          formatWXPayToQRCode(res.wx_code);
-          console.log(res);
+          formatWXPayToQRCode(res.data.wx_code);
         },
         fail: (res) => {
           console.log(res);
@@ -345,81 +345,83 @@ const _sfc_main = {
     });
     return (_ctx, _cache) => {
       return common_vendor.e({
-        a: service.value.icon_image ? service.value.icon_image_url : "../../static/resource/images/avatar.jpg",
-        b: common_vendor.t(service.value.name),
-        c: common_vendor.o(handleServiceTap),
-        d: hospitals.value.length > 0 && service.value.stype == "10" || service.value.stype == "15" || service.value.stype == "20"
+        a: common_assets._imports_0$5,
+        b: service.value.icon_image ? service.value.icon_image_url : "../../static/resource/images/avatar.jpg",
+        c: common_vendor.t(service.value.name),
+        d: common_vendor.o(handleServiceTap),
+        e: hospitals.value.length > 0 && service.value.stype == "10" || service.value.stype == "15" || service.value.stype == "20"
       }, hospitals.value.length > 0 && service.value.stype == "10" || service.value.stype == "15" || service.value.stype == "20" ? common_vendor.e({
-        e: hospitals.value[hospital_index.value].name,
-        f: common_vendor.o(onHospitalChange),
-        g: hospital_index.value,
-        h: hospitals.value,
-        i: common_vendor.o(onStartTimeChanged),
-        j: common_vendor.p({
+        f: hospitals.value[hospital_index.value].name,
+        g: common_vendor.o(onHospitalChange),
+        h: hospital_index.value,
+        i: hospitals.value,
+        j: common_vendor.o(onStartTimeChanged),
+        k: common_vendor.p({
           timestamp: order.starttime,
           placeholder: "请选择就诊时间"
         }),
-        k: personInfo.value.name,
-        l: common_vendor.o(goSelectPerson),
-        m: service.value.stype == 15
+        l: personInfo.value.name,
+        m: common_vendor.o(goSelectPerson),
+        n: service.value.stype == 15
       }, service.value.stype == 15 ? {
-        n: order.receiveAddress,
-        o: common_vendor.o(($event) => order.receiveAddress = $event.detail.value)
+        o: order.receiveAddress,
+        p: common_vendor.o(($event) => order.receiveAddress = $event.detail.value)
       } : {}, {
-        p: order.tel,
-        q: common_vendor.o(($event) => order.tel = $event.detail.value),
-        r: order.demand,
-        s: common_vendor.o(($event) => order.demand = $event.detail.value)
+        q: order.tel,
+        r: common_vendor.o(($event) => order.tel = $event.detail.value),
+        s: order.demand,
+        t: common_vendor.o(($event) => order.demand = $event.detail.value)
       }) : {}, {
-        t: hospitals.value.length > 0 && service.value.stype == "30" || service.value.stype == "40"
+        v: hospitals.value.length > 0 && service.value.stype == "30" || service.value.stype == "40"
       }, hospitals.value.length > 0 && service.value.stype == "30" || service.value.stype == "40" ? {
-        v: hospitals.value[hospital_index.value].name,
-        w: common_vendor.o(onHospitalChange),
-        x: hospital_index.value,
-        y: hospitals.value,
-        z: common_vendor.o(onStartTimeChanged),
-        A: common_vendor.p({
+        w: hospitals.value[hospital_index.value].name,
+        x: common_vendor.o(onHospitalChange),
+        y: hospital_index.value,
+        z: hospitals.value,
+        A: common_vendor.o(onStartTimeChanged),
+        B: common_vendor.p({
           timestamp: order.starttime,
           placeholder: "请选择期望服务时间"
         }),
-        B: userReceiveInfo.value,
-        C: common_vendor.o(onAddressChange),
-        D: order.tel,
-        E: common_vendor.o(($event) => order.tel = $event.detail.value),
-        F: order.demand,
-        G: common_vendor.o(($event) => order.demand = $event.detail.value)
+        C: userReceiveInfo.value,
+        D: common_vendor.o(onAddressChange),
+        E: order.tel,
+        F: common_vendor.o(($event) => order.tel = $event.detail.value),
+        G: order.demand,
+        H: common_vendor.o(($event) => order.demand = $event.detail.value)
       } : {}, {
-        H: common_vendor.n("is_xieyi " + (is_xieyi.value ? "is_xieyi_on" : "")),
-        I: common_vendor.o(onXieyiChange),
-        J: cfg.page_xy,
-        K: cfg.page_fw,
-        L: order.price > 0
+        I: common_vendor.n("is_xieyi " + (is_xieyi.value ? "is_xieyi_on" : "")),
+        J: common_vendor.o(onXieyiChange),
+        K: cfg.page_xy,
+        L: cfg.page_fw,
+        M: order.price > 0
       }, order.price > 0 ? {
-        M: common_vendor.t(order.price)
+        N: common_vendor.t(order.price)
       } : {}, {
-        N: common_vendor.n("btnp " + (is_xieyi.value ? "" : "btnp-disabled")),
-        O: common_vendor.o(submit),
-        P: validMobile.value.phone,
-        Q: common_vendor.o(($event) => validMobile.value.phone = $event.detail.value),
-        R: validMobile.value.validCode,
-        S: common_vendor.o(($event) => validMobile.value.validCode = $event.detail.value),
-        T: common_vendor.t(countdown.value.validText),
-        U: common_vendor.o(countdownChange),
-        V: common_vendor.o(cancal),
-        W: common_vendor.o(ok),
-        X: common_vendor.sr(popup, "081b76ea-2", {
+        O: common_vendor.n("btnp " + (is_xieyi.value ? "" : "btnp-disabled")),
+        P: common_vendor.o(submit),
+        Q: validMobile.value.phone,
+        R: common_vendor.o(($event) => validMobile.value.phone = $event.detail.value),
+        S: validMobile.value.validCode,
+        T: common_vendor.o(($event) => validMobile.value.validCode = $event.detail.value),
+        U: common_vendor.t(countdown.value.validText),
+        V: common_vendor.o(countdownChange),
+        W: common_vendor.o(cancal),
+        X: common_vendor.o(ok),
+        Y: common_vendor.sr(popup, "081b76ea-2", {
           "k": "popup"
         }),
-        Y: common_vendor.p({
+        Z: common_vendor.p({
           type: "center",
           ["is-mask-click"]: false,
           ["background-color"]: "#fff"
         }),
-        Z: common_vendor.o(closeQRCodePopup),
-        aa: common_vendor.sr(QRCodePopup, "081b76ea-3", {
+        aa: common_assets._imports_0$1,
+        ab: common_vendor.o(closeQRCodePopup),
+        ac: common_vendor.sr(QRCodePopup, "081b76ea-3", {
           "k": "QRCodePopup"
         }),
-        ab: common_vendor.p({
+        ad: common_vendor.p({
           type: "center",
           ["is-mask-click"]: false,
           ["background-color"]: "#fff"
@@ -428,5 +430,4 @@ const _sfc_main = {
     };
   }
 };
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "D:/Documents/HBuilderProjects/peizhengproject/pages/service/index.vue"]]);
-wx.createPage(MiniProgramPage);
+wx.createPage(_sfc_main);

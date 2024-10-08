@@ -624,8 +624,8 @@
 			},
 			data: params,
 			success: res => {
-				formatWXPayToQRCode(res.wx_code)
-				console.log(res)
+				formatWXPayToQRCode(res.data.wx_code)
+				// console.log(res.data.wx_code, 'res.wx_code ')
 			},
 			fail: res => {
 				console.log(res)

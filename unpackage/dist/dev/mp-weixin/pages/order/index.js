@@ -1,5 +1,6 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
+const common_assets = require("../../common/assets.js");
 if (!Array) {
   const _easycom_formater2 = common_vendor.resolveComponent("formater");
   const _easycom_counter2 = common_vendor.resolveComponent("counter");
@@ -169,8 +170,10 @@ const _sfc_main = {
         k: list.value != null
       }, list.value != null ? common_vendor.e({
         l: list.value != null && list.value.length == 0
-      }, list.value != null && list.value.length == 0 ? {} : {
-        m: common_vendor.f(list.value, (item, index, i0) => {
+      }, list.value != null && list.value.length == 0 ? {
+        m: common_assets._imports_0$2
+      } : {
+        n: common_vendor.f(list.value, (item, index, i0) => {
           return common_vendor.e({
             a: item.service_logo_image_url,
             b: common_vendor.t(item.service_name),
@@ -223,18 +226,18 @@ const _sfc_main = {
           });
         })
       }) : {}, {
-        n: validMobile.value.phone,
-        o: common_vendor.o(($event) => validMobile.value.phone = $event.detail.value),
-        p: validMobile.value.validCode,
-        q: common_vendor.o(($event) => validMobile.value.validCode = $event.detail.value),
-        r: common_vendor.t(countdown.value.validText),
-        s: common_vendor.o(countdownChange),
-        t: common_vendor.o(cancal),
-        v: common_vendor.o(ok),
-        w: common_vendor.sr(popup, "e7e446b8-4", {
+        o: validMobile.value.phone,
+        p: common_vendor.o(($event) => validMobile.value.phone = $event.detail.value),
+        q: validMobile.value.validCode,
+        r: common_vendor.o(($event) => validMobile.value.validCode = $event.detail.value),
+        s: common_vendor.t(countdown.value.validText),
+        t: common_vendor.o(countdownChange),
+        v: common_vendor.o(cancal),
+        w: common_vendor.o(ok),
+        x: common_vendor.sr(popup, "e7e446b8-4", {
           "k": "popup"
         }),
-        x: common_vendor.p({
+        y: common_vendor.p({
           type: "center",
           ["is-mask-click"]: false,
           ["background-color"]: "#fff"
@@ -243,5 +246,4 @@ const _sfc_main = {
     };
   }
 };
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "D:/Documents/HBuilderProjects/peizhengproject/pages/order/index.vue"]]);
-wx.createPage(MiniProgramPage);
+wx.createPage(_sfc_main);

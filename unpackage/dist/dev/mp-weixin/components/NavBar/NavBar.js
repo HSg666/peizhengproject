@@ -1,5 +1,6 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
+const common_assets = require("../../common/assets.js");
 const _sfc_main = {
   __name: "NavBar",
   props: {
@@ -106,14 +107,17 @@ const _sfc_main = {
         d: common_vendor.s("height:" + containerH.value + "rpx;line-height:" + containerH.value + "rpx;")
       } : common_vendor.e({
         e: pageLeng.value > 1
-      }, pageLeng.value > 1 ? {} : {}, {
-        f: common_vendor.o(goPage),
-        g: common_vendor.t(__props.title),
-        h: common_vendor.s("height:" + containerH.value + "rpx;line-height:" + containerH.value + "rpx;" + textStyle.value),
-        i: common_vendor.s("height:" + containerH.value + "rpx;" + contaninerBackground.value)
+      }, pageLeng.value > 1 ? {
+        f: common_assets._imports_0$6
+      } : {
+        g: common_assets._imports_1$1
+      }, {
+        h: common_vendor.o(goPage),
+        i: common_vendor.t(__props.title),
+        j: common_vendor.s("height:" + containerH.value + "rpx;line-height:" + containerH.value + "rpx;" + textStyle.value),
+        k: common_vendor.s("height:" + containerH.value + "rpx;" + contaninerBackground.value)
       }));
     };
   }
 };
-const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "D:/Documents/HBuilderProjects/peizhengproject/components/NavBar/NavBar.vue"]]);
-wx.createComponent(Component);
+wx.createComponent(_sfc_main);

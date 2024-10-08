@@ -1,5 +1,6 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
+const common_assets = require("../../common/assets.js");
 if (!Array) {
   const _easycom_NavBar2 = common_vendor.resolveComponent("NavBar");
   _easycom_NavBar2();
@@ -57,18 +58,20 @@ const _sfc_main = {
         a: common_vendor.p({
           isHome: true
         }),
-        b: bannerList.value && bannerList.value.length > 0
+        b: common_assets._imports_0,
+        c: common_assets._imports_0$1,
+        d: bannerList.value && bannerList.value.length > 0
       }, bannerList.value && bannerList.value.length > 0 ? {
-        c: common_vendor.f(bannerList.value, (item, index, i0) => {
+        e: common_vendor.f(bannerList.value, (item, index, i0) => {
           return {
             a: item.pic_image_url,
             b: item.id
           };
         })
       } : {}, {
-        d: nav2s.value && nav2s.value.length > 0
+        f: nav2s.value && nav2s.value.length > 0
       }, nav2s.value && nav2s.value.length > 0 ? {
-        e: common_vendor.f(nav2s.value, (item, index, i0) => {
+        g: common_vendor.f(nav2s.value, (item, index, i0) => {
           return {
             a: item.pic_image_url,
             b: common_vendor.o(($event) => goPage(item.stype_link), item.id),
@@ -76,7 +79,7 @@ const _sfc_main = {
           };
         })
       } : {}, {
-        f: common_vendor.f(navs.value, (item, index, i0) => {
+        h: common_vendor.f(navs.value, (item, index, i0) => {
           return {
             a: item.pic_image_url,
             b: common_vendor.t(item.title),
@@ -85,7 +88,7 @@ const _sfc_main = {
             e: item.id
           };
         }),
-        g: common_vendor.f(hospitalList.value, (item, index, i0) => {
+        i: common_vendor.f(hospitalList.value, (item, index, i0) => {
           return {
             a: item.avatar ? item.avatar_url : "../../static/resource/images/avatar.jpg",
             b: common_vendor.t(item.name),
@@ -100,5 +103,4 @@ const _sfc_main = {
     };
   }
 };
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "D:/Documents/HBuilderProjects/peizhengproject/pages/index/index.vue"]]);
-wx.createPage(MiniProgramPage);
+wx.createPage(_sfc_main);

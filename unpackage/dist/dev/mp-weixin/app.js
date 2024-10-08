@@ -27,7 +27,6 @@ const _sfc_main = {
     utils: common_js_utils.Utils
   }
 };
-const App = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "D:/Documents/HBuilderProjects/peizhengproject/App.vue"]]);
 Date.prototype.VP_FORMAT = function(format) {
   var ds = parseInt(this.getTime() / (24 * 60 * 60 * 1e3)) - parseInt((/* @__PURE__ */ new Date()).getTime() / (24 * 60 * 60 * 1e3));
   var n = "";
@@ -67,7 +66,7 @@ Date.prototype.VP_FORMAT = function(format) {
   return format;
 };
 function createApp() {
-  const app = common_vendor.createSSRApp(App);
+  const app = common_vendor.createSSRApp(_sfc_main);
   return {
     app
   };

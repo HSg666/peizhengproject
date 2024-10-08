@@ -1,5 +1,6 @@
 "use strict";
 const common_vendor = require("../../../common/vendor.js");
+const common_assets = require("../../../common/assets.js");
 if (!Array) {
   const _easycom_counter2 = common_vendor.resolveComponent("counter");
   const _easycom_formater2 = common_vendor.resolveComponent("formater");
@@ -83,94 +84,96 @@ const _sfc_main = {
     };
     return (_ctx, _cache) => {
       return common_vendor.e({
-        a: common_vendor.n("od-jd od-jd-" + orderStatus.value),
-        b: orderStatus.value == 10
+        a: common_assets._imports_0$5,
+        b: common_vendor.n("od-jd od-jd-" + orderStatus.value),
+        c: orderStatus.value == 10
       }, orderStatus.value == 10 ? {
-        c: common_vendor.o(onCounterOver),
-        d: common_vendor.p({
+        d: common_vendor.o(onCounterOver),
+        e: common_vendor.p({
           second: order.value._exp_time
         }),
-        e: common_vendor.t(order.value.price),
-        f: common_vendor.o(($event) => dopay(order.value.code_url))
+        f: common_vendor.t(order.value.price),
+        g: common_vendor.o(($event) => dopay(order.value.code_url))
       } : {}, {
-        g: orderStatus.value == 20
+        h: orderStatus.value == 20
       }, orderStatus.value == 20 ? common_vendor.e({
-        h: order.value.service_state == 0
+        i: order.value.service_state == 0
       }, order.value.service_state == 0 ? {} : {}, {
-        i: order.value.service_state == 1
+        j: order.value.service_state == 1
       }, order.value.service_state == 1 ? {} : {}) : {}, {
-        j: orderStatus.value == 30
+        k: orderStatus.value == 30
       }, orderStatus.value == 30 ? {} : {}, {
-        k: orderStatus.value == 40
+        l: orderStatus.value == 40
       }, orderStatus.value == 40 ? {} : {}, {
-        l: orderStatus.value == 20
+        m: orderStatus.value == 20
       }, orderStatus.value == 20 ? {
-        m: order.value._staff.avatar_url,
-        n: common_vendor.t(order.value._staff.nickname),
-        o: common_vendor.o(($event) => makePhoneCall(order.value._staff.mobile))
+        n: order.value._staff.avatar_url,
+        o: common_vendor.t(order.value._staff.nickname),
+        p: common_vendor.o(($event) => makePhoneCall(order.value._staff.mobile))
       } : {}, {
-        p: common_vendor.t(order.value.service_name),
-        q: order.value.service_stype <= 20
+        q: common_vendor.t(order.value.service_name),
+        r: order.value.service_stype <= 20
       }, order.value.service_stype <= 20 ? common_vendor.e({
-        r: common_vendor.t(order.value.hospital_name),
-        s: common_vendor.p({
+        s: common_vendor.t(order.value.hospital_name),
+        t: common_vendor.p({
           timestamp: order.value.starttime,
           format: "YYYY-MM-dd hh:mm"
         }),
-        t: common_vendor.t(order.value.client_name),
-        v: common_vendor.t(order.value.client_sex == 1 ? "男" : "女"),
-        w: common_vendor.t(order.value.client_age),
-        x: common_vendor.t(order.value.tel),
-        y: order.value.service_stype == 15
+        v: common_vendor.t(order.value.client_name),
+        w: common_vendor.t(order.value.client_sex == 1 ? "男" : "女"),
+        x: common_vendor.t(order.value.client_age),
+        y: common_vendor.t(order.value.tel),
+        z: order.value.service_stype == 15
       }, order.value.service_stype == 15 ? {
-        z: common_vendor.t(order.value.receiveAddress)
+        A: common_vendor.t(order.value.receiveAddress)
       } : {}) : {}, {
-        A: order.value.service_stype > 20 && order.value.service_stype < 100
+        B: order.value.service_stype > 20 && order.value.service_stype < 100
       }, order.value.service_stype > 20 && order.value.service_stype < 100 ? {
-        B: common_vendor.t(order.value.hospital_name),
-        C: common_vendor.p({
+        C: common_vendor.t(order.value.hospital_name),
+        D: common_vendor.p({
           timestamp: order.value.starttime,
           format: "YYYY-MM-dd hh:mm"
         }),
-        D: common_vendor.t(order.value.address.userName),
-        E: common_vendor.t(order.value.address.telNumber),
-        F: common_vendor.t(order.value.address.cityName),
-        G: common_vendor.t(order.value.address.countyName),
-        H: common_vendor.t(order.value.address.detailInfo)
+        E: common_vendor.t(order.value.address.userName),
+        F: common_vendor.t(order.value.address.telNumber),
+        G: common_vendor.t(order.value.address.cityName),
+        H: common_vendor.t(order.value.address.countyName),
+        I: common_vendor.t(order.value.address.detailInfo)
       } : {}, {
-        I: order.value.service_stype > 100
+        J: order.value.service_stype > 100
       }, order.value.service_stype > 100 ? {
-        J: common_vendor.p({
+        K: common_vendor.p({
           timestamp: order.value.starttime,
           format: "YYYY-MM-dd hh:mm"
         }),
-        K: common_vendor.t(order.value.client_name),
-        L: common_vendor.t(order.value.client_sex == 1 ? "男" : "女"),
-        M: common_vendor.t(order.value.client_age),
-        N: common_vendor.t(order.value.client_mobile),
-        O: common_vendor.t(order.value.address.address)
+        L: common_vendor.t(order.value.client_name),
+        M: common_vendor.t(order.value.client_sex == 1 ? "男" : "女"),
+        N: common_vendor.t(order.value.client_age),
+        O: common_vendor.t(order.value.client_mobile),
+        P: common_vendor.t(order.value.address.address)
       } : {}, {
-        P: common_vendor.t(order.value.demand),
-        Q: common_vendor.t(order.value.tel),
-        R: common_vendor.p({
+        Q: common_vendor.t(order.value.demand),
+        R: common_vendor.t(order.value.tel),
+        S: common_vendor.p({
           timestamp: order.value.order_start_time,
           format: "YYYY-MM-dd hh:mm"
         }),
-        S: common_vendor.t(order.value.price),
-        T: orderStatus.value == 20
+        T: common_vendor.t(order.value.price),
+        U: orderStatus.value == 20
       }, orderStatus.value == 20 ? {
-        U: common_vendor.t(order.value.price),
-        V: common_vendor.p({
+        V: common_vendor.t(order.value.price),
+        W: common_vendor.p({
           timestamp: order.value.pay_time,
           format: "YYYY-MM-dd hh:mm"
         })
       } : {}, {
-        W: common_vendor.t(order.value.out_trade_no),
-        X: common_vendor.o(closeQRCodePopup),
-        Y: common_vendor.sr(QRCodePopup, "86379e58-6", {
+        X: common_vendor.t(order.value.out_trade_no),
+        Y: common_assets._imports_0$1,
+        Z: common_vendor.o(closeQRCodePopup),
+        aa: common_vendor.sr(QRCodePopup, "86379e58-6", {
           "k": "QRCodePopup"
         }),
-        Z: common_vendor.p({
+        ab: common_vendor.p({
           type: "center",
           ["is-mask-click"]: false,
           ["background-color"]: "#fff"
@@ -179,5 +182,4 @@ const _sfc_main = {
     };
   }
 };
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "D:/Documents/HBuilderProjects/peizhengproject/pages/order/orderDetail/index.vue"]]);
-wx.createPage(MiniProgramPage);
+wx.createPage(_sfc_main);

@@ -1,5 +1,6 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
+const common_assets = require("../../common/assets.js");
 if (!Array) {
   const _easycom_share2 = common_vendor.resolveComponent("share");
   const _easycom_uni_popup2 = common_vendor.resolveComponent("uni-popup");
@@ -154,38 +155,46 @@ const _sfc_main = {
         a: mine.value.avatar
       }, mine.value.avatar ? {
         b: mine.value.avatar_url
-      } : {}, {
-        c: common_vendor.t(mine.value.nickname ? mine.value.nickname : "用户" + mine.value._id),
-        d: common_vendor.o(($event) => toOrders("")),
-        e: statistic.value.topays > 0
+      } : {
+        c: common_assets._imports_0$3
+      }, {
+        d: common_vendor.t(mine.value.nickname ? mine.value.nickname : "用户" + mine.value._id),
+        e: common_vendor.o(($event) => toOrders("")),
+        f: common_assets._imports_1,
+        g: statistic.value.topays > 0
       }, statistic.value.topays > 0 ? {
-        f: common_vendor.t(statistic.value.topays)
+        h: common_vendor.t(statistic.value.topays)
       } : {}, {
-        g: common_vendor.o(($event) => toOrders(1)),
-        h: statistic.value.todos > 0
+        i: common_vendor.o(($event) => toOrders(1)),
+        j: common_assets._imports_2,
+        k: statistic.value.todos > 0
       }, statistic.value.todos > 0 ? {
-        i: common_vendor.t(statistic.value.todos)
+        l: common_vendor.t(statistic.value.todos)
       } : {}, {
-        j: common_vendor.o(($event) => toOrders(2)),
-        k: common_vendor.o(($event) => toOrders(3)),
-        l: common_vendor.o(($event) => toOrders(4)),
-        m: common_vendor.o(toServiceManager),
-        n: common_vendor.o(showShareModal),
-        o: common_vendor.p({
+        m: common_vendor.o(($event) => toOrders(2)),
+        n: common_assets._imports_3,
+        o: common_vendor.o(($event) => toOrders(3)),
+        p: common_assets._imports_4,
+        q: common_vendor.o(($event) => toOrders(4)),
+        r: common_assets._imports_5,
+        s: common_vendor.o(toServiceManager),
+        t: common_assets._imports_6,
+        v: common_vendor.o(showShareModal),
+        w: common_vendor.p({
           shareModal: clone_shareModal.value
         }),
-        p: validMobile.value.phone,
-        q: common_vendor.o(($event) => validMobile.value.phone = $event.detail.value),
-        r: validMobile.value.validCode,
-        s: common_vendor.o(($event) => validMobile.value.validCode = $event.detail.value),
-        t: common_vendor.t(countdown.value.validText),
-        v: common_vendor.o(countdownChange),
-        w: common_vendor.o(cancal),
-        x: common_vendor.o(ok),
-        y: common_vendor.sr(popup, "3d0ab60b-1", {
+        x: validMobile.value.phone,
+        y: common_vendor.o(($event) => validMobile.value.phone = $event.detail.value),
+        z: validMobile.value.validCode,
+        A: common_vendor.o(($event) => validMobile.value.validCode = $event.detail.value),
+        B: common_vendor.t(countdown.value.validText),
+        C: common_vendor.o(countdownChange),
+        D: common_vendor.o(cancal),
+        E: common_vendor.o(ok),
+        F: common_vendor.sr(popup, "3d0ab60b-1", {
           "k": "popup"
         }),
-        z: common_vendor.p({
+        G: common_vendor.p({
           type: "center",
           ["is-mask-click"]: false,
           ["background-color"]: "#fff"
@@ -194,5 +203,4 @@ const _sfc_main = {
     };
   }
 };
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "D:/Documents/HBuilderProjects/peizhengproject/pages/user/index.vue"]]);
-wx.createPage(MiniProgramPage);
+wx.createPage(_sfc_main);

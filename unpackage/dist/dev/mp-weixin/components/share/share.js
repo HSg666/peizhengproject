@@ -1,5 +1,6 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
+const common_assets = require("../../common/assets.js");
 const _sfc_main = {
   __name: "share",
   props: ["shareModal"],
@@ -27,11 +28,13 @@ const _sfc_main = {
         c: shareModalClone.value
       }, shareModalClone.value ? {
         d: common_vendor.o(hideShareModal),
-        e: common_vendor.o(hideShareModal),
-        f: common_vendor.o(shareByPoster)
+        e: common_assets._imports_0$1,
+        f: common_vendor.o(hideShareModal),
+        g: common_assets._imports_1$2,
+        h: common_assets._imports_2$1,
+        i: common_vendor.o(shareByPoster)
       } : {});
     };
   }
 };
-const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "D:/Documents/HBuilderProjects/peizhengproject/components/share/share.vue"]]);
-wx.createComponent(Component);
+wx.createComponent(_sfc_main);

@@ -1,5 +1,6 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
+const common_assets = require("../../common/assets.js");
 if (!Array) {
   const _component_navbar = common_vendor.resolveComponent("navbar");
   const _easycom_share2 = common_vendor.resolveComponent("share");
@@ -57,10 +58,11 @@ const _sfc_main = {
         e: common_vendor.t(hospital.value.rank),
         f: common_vendor.t(hospital.value.label),
         g: common_vendor.o(showShareModal),
-        h: common_vendor.t(hospital.value.city),
-        i: common_vendor.t(hospital.value.district),
-        j: common_vendor.t(hospital.value.address),
-        k: common_vendor.f(services.value, (item, index, i0) => {
+        h: common_assets._imports_0$4,
+        i: common_vendor.t(hospital.value.city),
+        j: common_vendor.t(hospital.value.district),
+        k: common_vendor.t(hospital.value.address),
+        l: common_vendor.f(services.value, (item, index, i0) => {
           return common_vendor.e({
             a: item.use_switch == 1
           }, item.use_switch == 1 ? {
@@ -73,13 +75,12 @@ const _sfc_main = {
             g: index
           });
         }),
-        l: common_vendor.s("position:absolute;top:0rpx;padding-top:65rpx;overflow:hidden;width:100%;"),
-        m: common_vendor.p({
+        m: common_vendor.s("position:absolute;top:0rpx;padding-top:65rpx;overflow:hidden;width:100%;"),
+        n: common_vendor.p({
           shareModal: clone_shareModal.value
         })
       };
     };
   }
 };
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "D:/Documents/HBuilderProjects/peizhengproject/pages/hospital/index.vue"]]);
-wx.createPage(MiniProgramPage);
+wx.createPage(_sfc_main);

@@ -33,5 +33,4 @@ const _sfc_main = {
     };
   }
 };
-const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "D:/Documents/HBuilderProjects/peizhengproject/components/formater/formater.vue"]]);
-wx.createComponent(Component);
+wx.createComponent(_sfc_main);
